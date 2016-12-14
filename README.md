@@ -24,6 +24,9 @@
 글을 쓰게 되길 바랍니다. 어셈블리로 컴퓨터 세상에 대한 눈을 떴다면
 LISP을 공부한 후로는 컴퓨터 세상과 실제 우리가 사는 세상을 하나로 볼 수 있게 되었습니다.
 
+PS: 처음에는 오픈튜토리얼사이트에 올렸던 강좌인데 제가 해외에있다보니 접속이 잘 안되서 gitbook 사이트로 옮긴 글들입니다. 강좌 원본은 여기 있습니다. 
+https://opentutorials.org/module/1087
+
 PS: 참고로 제 홈페이지에 오시면 16비트 부트로더나 32비트 어셈블리 프로그래밍 등 어셈블리 관련된 문서들이 있습니다. http://gurugio.kldp.net/wiki/wiki.php/asm_basic
 
 PS: 리눅스 환경에서 32비트 어셈블리로 시스템 프로그래밍을 하는 문서입니다. http://www.joinc.co.kr/modules/moniwiki/wiki.php/Site/Assembly/Documents/ProgrammingGroundUp/index.html
