@@ -24,13 +24,32 @@
 글을 쓰게 되길 바랍니다. 어셈블리로 컴퓨터 세상에 대한 눈을 떴다면
 LISP을 공부한 후로는 컴퓨터 세상과 실제 우리가 사는 세상을 하나로 볼 수 있게 되었습니다.
 
-PS: 처음에는 오픈튜토리얼사이트에 올렸던 강좌인데 제가 해외에있다보니 접속이 잘 안되서 gitbook 사이트로 옮긴 글들입니다. 강좌 원본은 여기 있습니다. 
-https://opentutorials.org/module/1087
+# Table of contents
 
-PS: 참고로 제 홈페이지에 오시면 16비트 부트로더나 32비트 어셈블리 프로그래밍 등 어셈블리 관련된 문서들이 있습니다. http://gurugio.kldp.net/wiki/wiki.php/asm_basic
-
-PS: 리눅스 환경에서 32비트 어셈블리로 시스템 프로그래밍을 하는 문서입니다. http://www.joinc.co.kr/modules/moniwiki/wiki.php/Site/Assembly/Documents/ProgrammingGroundUp/index.html
-
-PS: 진지하게 어셈블리를 공부하고싶으시면 Art of Assembly Programming을 추천합니다. 1년 정도는 재미있을 수 있습니다.
-
-PS: 전설적인 The Art Of Computer Programming도 어셈블리 유사 언어로 써진 책입니다. 죽기전에 한번쯤은 도전해보자구요 ;-)
+* [Introduction](README.md)
+* [intro\_emu8086](introemu8086.md)
+* [number](number.md)
+* [8086\_arch](8086arch.md)
+* [mov](mov.md)
+* [memory\_read\_write](memoryreadwrite.md)
+* [addressing](addressing.md)
+* [use\_mov](usemov.md)
+* [variable](variable.md)
+* [array](array.md)
+* [pointer](pointer.md)
+* [why\_assembly](whyassembly.md)
+* [logic\_operation](logicoperation.md)
+* [add\_sub\_mul](addsubmul.md)
+* [div](div.md)
+* [inc\_dec](incdec.md)
+* [jump](jump.md)
+* [conditional\_jump](conditionaljump.md)
+* [compare](compare.md)
+* [repeat](repeat.md)
+* [stack](stack.md)
+* [function](function.md)
+* [function\_calling](functioncalling.md)
+* [bios\_interrupt](biosinterrupt.md)
+* [macro\_func](macrofunc.md)
+* [howto\_emu8086.inc](howtoemu8086inc.md)
+* [go\_further](gofurther.md)
