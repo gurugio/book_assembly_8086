@@ -14,7 +14,7 @@
 
 \(다운로드 링크가 닫혀서 제 홈페이지에 파일을 올렸습니다\)
 
-https://github.com/gurugio/book\_assembly\_8086/blob/master/assets/emu003.zip
+[Download](https://github.com/gurugio/book_assembly_8086/raw/master/assets/emu003.zip)
 
 
 
