@@ -1,36 +1,52 @@
-# 태초의 프로그래밍 언어 어셈블리
+# In the beginning was the Assembly
 
 컴퓨터 세계의 태초에 말씀이 있었으니 어셈블리 언어입니다.
-프로그래밍 언어라기에는 너무 컴퓨터에 가까워서 언어라고 하기 어렵고
+
+In the Beginning of the computer world, there is a Word. It's the Assembly language.  
+프로그래밍 언어라기에는 너무 컴퓨터에 가까워서 언어라고 하기 어렵고  
 그렇다고 0과 1로 이루어진 컴퓨터 신호도 아닌 이상한 언어입니다.
+
+It's so close to the machine that it's hard to call it a language.
+
+But it's neither binary code with 0 and 1.  
 태초의 언어이므로 컴퓨터의 세부적인 동작 하나하나를 직접 지시할 수 있습니다.
-그렇기 어셈블리 언어를 배운다는 것은 프로그래밍을 배운다기보다는
+
+The assembly exists since the beginning. It can command direcly the command in very detail.  
+그렇기 어셈블리 언어를 배운다는 것은 프로그래밍을 배운다기보다는  
 컴퓨터 그 자체를 배우는 것에 가깝습니다.
-그런데 그렇게 컴퓨터 그 자체를 배우다보면 세상 모든 프로그래밍 언어가
+
+Therefore learning the assembly is rather close to learning the computer than programming.  
+그런데 그렇게 컴퓨터 그 자체를 배우다보면 세상 모든 프로그래밍 언어가  
 어떤 원리로 돌아가는지 알게됩니다.
-마치 매트릭스 세계에서 네오가 세상을 코드로 보는 것처럼
+
+If you understand the computer itself you can see deep inside of the all programming languages.
+
+And you can see the principle common to all programming languages.  
+마치 매트릭스 세계에서 네오가 세상을 코드로 보는 것처럼  
 컴퓨터 세상의 모든게 어셈블리 기호들로 보이기 시작합니다.
+
+It's like that Neo can see the code of Matrix.
+
+You can see the assembly code of programs.  
 그래서 너무나 재밌습니다.
+
+It's really fun.  
 복잡한 컴퓨터 세상을 이루는 원리들이 눈에 보인다는 것은 새로운 세상이 열리는것 같지요.
 
+You will meet the new world inside of the computer that is actuall composed by many layers.
+
+But you can see the very deep aspect of the computer world.
 
 어셈블리 언어를 배우면 프로그래밍을 더 잘하거나 실력이 좋아진다는 말은 못합니다.
-저부터가 프로그래밍을 잘하거나 뛰어난 개발자가 아니기 때문입니다.
-그래도 처음 어셈블리 언어를 배우고 컴퓨터 세상에 대해 새롭게 눈뜬 순간의 흥분은
+
+I cannot say that you would be super programmer if you know the assembly.  
+그래도 처음 어셈블리 언어를 배우고 컴퓨터 세상에 대해 새롭게 눈뜬 순간의 흥분은  
 아직도 저를 이끌어서 리눅스 커널과 컴퓨터 구조를 공부하게 만들고 있습니다.
+
+But the excitement I felt when I first knew the assembly led me to the another world, Linux kernel and computer architecture.  
 많은 분들이 세상을 다르게 볼 수 있는 기회를 가지셨으면 합니다.
 
-참고로 나중에 기회가 되면 어셈블리와는 완전히 반대로 완전히 추상적인 언어인 LISP에 대해서도
-글을 쓰게 되길 바랍니다. 어셈블리로 컴퓨터 세상에 대한 눈을 떴다면
-LISP을 공부한 후로는 컴퓨터 세상과 실제 우리가 사는 세상을 하나로 볼 수 있게 되었습니다.
+I want more people to have the chance to see the other aspect of the computer world.
 
-PS: 처음에는 오픈튜토리얼사이트에 올렸던 강좌인데 제가 해외에있다보니 접속이 잘 안되서 gitbook 사이트로 옮긴 글들입니다. 강좌 원본은 여기 있습니다. 
-https://opentutorials.org/module/1087
+I want to be _Morpheus who gave the Red Pill to Neo_ ;-\)
 
-PS: 참고로 제 홈페이지에 오시면 16비트 부트로더나 32비트 어셈블리 프로그래밍 등 어셈블리 관련된 문서들이 있습니다. http://gurugio.kldp.net/wiki/wiki.php/asm_basic
-
-PS: 리눅스 환경에서 32비트 어셈블리로 시스템 프로그래밍을 하는 문서입니다. http://www.joinc.co.kr/modules/moniwiki/wiki.php/Site/Assembly/Documents/ProgrammingGroundUp/index.html
-
-PS: 진지하게 어셈블리를 공부하고싶으시면 Art of Assembly Programming을 추천합니다. 1년 정도는 재미있을 수 있습니다.
-
-PS: 전설적인 The Art Of Computer Programming도 어셈블리 유사 언어로 써진 책입니다. 죽기전에 한번쯤은 도전해보자구요 ;-)
