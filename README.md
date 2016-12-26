@@ -39,7 +39,6 @@ But you can see the very deep aspect of the computer world.
 
 어셈블리 언어를 배우면 프로그래밍을 더 잘하거나 실력이 좋아진다는 말은 못합니다.
 
-<<<<<<< HEAD
 I cannot say that you would be super programmer if you know the assembly.  
 그래도 처음 어셈블리 언어를 배우고 컴퓨터 세상에 대해 새롭게 눈뜬 순간의 흥분은  
 아직도 저를 이끌어서 리눅스 커널과 컴퓨터 구조를 공부하게 만들고 있습니다.
@@ -51,7 +50,8 @@ I want more people to have the chance to see the other aspect of the computer wo
 
 I want to be _Morpheus who gave the Red Pill to Neo_ ;-\)
 
-=======
+
+
 # Table of contents
 
 * [Introduction](README.md)
@@ -81,4 +81,6 @@ I want to be _Morpheus who gave the Red Pill to Neo_ ;-\)
 * [macro\_func](macrofunc.md)
 * [howto\_emu8086.inc](howtoemu8086inc.md)
 * [go\_further](gofurther.md)
->>>>>>> a994eceff7b70c33758e192dcf07dbce1e509e26
+
+
+
