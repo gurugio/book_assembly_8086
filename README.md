@@ -54,7 +54,6 @@ I want to be _Morpheus who gave the Red Pill to Neo_ ;-\)
 
 # Table of contents
 
-* [Introduction](README.md)
 * [intro\_emu8086](introemu8086.md)
 * [number](number.md)
 * [8086\_arch](8086arch.md)
