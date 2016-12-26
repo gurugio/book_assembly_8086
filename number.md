@@ -16,15 +16,25 @@ We will understand how the computer was related to the number in near future. Fi
 
 우리는 10진수를 씁니다. 0부터 9까지의 숫자 표기를 이용해서 수를 표현합니다. 이 숫자를 여러개 붙여서 특정한 값을 표현합니다. 예를 들어 754는 각 자리마다 10의 지수승으로 이루어져있습니다.
 
+Unfortunitely we use decimal number system. We use the number from 0 to 9 when we write a number. And you sometimes write one more numbers serially to write big number. For the big number, each digit means the numerical index.
+
+For example, let us think about 754.
+
 7 _ 10^2 + 5 _ 10^1 + 4 \* 10^0
 
 7은 10의 제곱승, 5는 10의 1승, 4는 10의 0승입니다. 10의 0승은 1이고요.
 
+7 is multiplied by square of 10 and 5 is multiplied by 10. 4 is multiplied by 10 to the power of 0. 10 to the power of 0 is 1.
+
 만약에 자리가 바뀌면 완전히 다른 숫자가 됩니다. 574는 754가 아니지요.
 
-## 2진수
+If the position is changed the number would be absolutely different. 574 is not 754.
+
+## 2진수 Hexadecimal
 
 컴퓨터는 전자적으로 2가지 상태를 가진 물질로 이루어져있습니다. 전자적인 신호가 있으면 1 없으면 0의 상태를 가진 물질입니다.\(주1\) 그래서 0부터 9까지 10개의 숫자를 기억할 수 없습니다. 그래서 컴퓨터는 2진수를 사용하는 것입니다.
+
+
 
 2진수란 수를 나타내는 숫자 표기가 2개인 것입니다. 0과 1입니다. 10진수는 열개의 숫자 표기가 있었지요.
 
@@ -34,7 +44,7 @@ We will understand how the computer was related to the number in near future. Fi
 
 10진수 754는 각 자리마다 10의 제곱승을 했습니다. 마찬가지로 2진수도 각 자리마다 2의 제곱승을 하면 됩니다. 가장 오른쪽은 2의 0승, 한칸 왼쪽은 2의 1승 이렇게 자리가 올라갈때마다 2를 곱하면 됩니다.
 
-10100101b = 1_2^0 + 1_2^2 + 1_2^5 + 1_2^7 = 1 + 4 + 32 + 128 = 5 + 160 = 165
+10100101b = 1\_2^0 + 1\_2^2 + 1\_2^5 + 1\_2^7 = 1 + 4 + 32 + 128 = 5 + 160 = 165
 
 반대로 165를 2진수로 표현하려면 어떻게 해야할까요? 중고등학교 수학시간에 배웠듯이 2로 나눠서 나머지를 나열하는 방법도 있습니다. 그보다 저는 165와 가장 가까운 2의 제곱수를 생각하는 방법을 좋아합니다.
 
@@ -86,7 +96,7 @@ We will understand how the computer was related to the number in near future. Fi
 
 그럼 16진수의 값 1234h를 10진수로 바꿔보겠습니다. 16의 제곱수가 0에서 시작해서 하나씩 늘어난다고 생각하면 됩니다.
 
-1234h = 4_16^0 + 3_16^1 + 2_16^2 + 1_16^3 = 4660
+1234h = 4\_16^0 + 3\_16^1 + 2\_16^2 + 1\_16^3 = 4660
 
 4660을 16진수로 표시하는 것은 2진수처럼 16의 제곱수를 외워서하던가 나눗셈을 하면 됩니다.
 
