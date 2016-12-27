@@ -51,27 +51,26 @@ The decimal number 754 has a power of 10 for each digit. Likewise, a binary numb
 
 반대로 165를 2진수로 표현하려면 어떻게 해야할까요? 중고등학교 수학시간에 배웠듯이 2로 나눠서 나머지를 나열하는 방법도 있습니다. 그보다 저는 165와 가장 가까운 2의 제곱수를 생각하는 방법을 좋아합니다.
 
-
-
-
-
+Conversely, how do you express 165 as a binary number? As you learned in school, there are ways to list the rest after dividing by 2. Rather, I like the way calculating the power of 2 which is the closest to 165.
 가장 먼저 165 = 128 + 37 라고 생각합니다. 128은 2^7인 것을 외우고 있기 때문입니다. 어셈블리 언어를 공부하다보니 2의 제곱수를 자연스럽게 많이 외우게 되었습니다.
+I think 165 = 128 + 37 first. Because 128 memorizes 2 ^ 7. As I studied assembly language, I was able to memorize the square of 2 naturally.
+
+
 
 165 = 2^7 + 37 이라면 그 다음으로 37 = 32 + 5 입니다. 32는 2^5 입니다. 그렇게 5도 4+1 이므로 2^2 + 1입니다. 결론은 165 = 2^7 + 2^5 + 2^2 + 2^0 입니다. 이걸 2진수로 바꾸는 방법은 제곱승의 숫자만큼 0을 붙이는 것입니다. 2^7은 0이 7개이므로 10000000b 입니다. 2^5는 0이 다섯개이므로 100000, 2^2는 100입니다. 다 더하면 10100101b 입니다.
 
+If 165 = 2 ^ 7 + 37 then 37 = 32 + 5. 32 is 2 ^ 5. So 5 is 4 + 1, so it is 2 ^ 2 + 1. The conclusion is 165 = 2 ^ 7 + 2 ^ 5 + 2 ^ 2 + 2 ^ 0. The way to convert this to binary is to add zero to the power of the square. 2 ^ 7 is 10000000b since there are seven zeros. 2 ^ 5 is 100000 and 2 ^ 2 is 100 because there are five zeros. Add everything to 10100101b.
+
 어떤 방법으로 계사하던지 아니면 계산기를 쓰던지 상관없습니다. 계산기가 제일 좋겠네요.
+
+It does not matter whether you live in a house or use a calculator. The calculator is the best.
 
 참고로 8086 어셈블리 언어에서는 2진수의 각 자리를 비트bit라고 부릅니다. 4개의 비트는 니블nibble 8개는 바이트byte 2개의 바이트를 워드word 4개의 바이트를 double word라고 부릅니다. 그리고 가장 오른쪽 비트를 low bit 라고 부르거나 Least Significant Bit라고 부르고 가장 왼쪽 비트는 Most Significant Bit라고 부릅니다.
 
 
-Conversely, how do you express 165 as a binary number? As you learned in secondary school math, there are ways to list the rest by dividing by 2. Rather, I like the way I think about the square of 165 and the closest 2.
-
-I think 165 = 128 + 37 first. Because 128 memorizes 2 ^ 7. As I studied assembly language, I was able to memorize the square of 2 naturally.
-
 If 165 = 2 ^ 7 + 37 then 37 = 32 + 5. 32 is 2 ^ 5. So 5 is 4 + 1, so it is 2 ^ 2 + 1. The conclusion is 165 = 2 ^ 7 + 2 ^ 5 + 2 ^ 2 + 2 ^ 0. The way to convert this to binary is to add zero to the power of the square. 2 ^ 7 is 10000000b since there are seven zeros. 2 ^ 5 is 100000 and 2 ^ 2 is 100 because there are five zeros. Add everything to 10100101b.
 
-It does not matter whether you live in a house or use a calculator. The calculator is the best.
-
+It does not matter whether you live in a house or use a calculator. The calculator is the bes
 Note that in the 8086 assembly language, each digit of a binary number is called a bit bit. 4 bits nibble 8 nibble byte byte 2 byte word word word 4 byte is called double word. The rightmost bit is called the low bit or the Least Significant Bit, and the leftmost bit is called the Most Significant Bit.
 
 
