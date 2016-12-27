@@ -74,23 +74,39 @@ Note that in the 8086 assembly language, each digit of a binary number is called
 ## 16진수
 
 컴퓨터 업계에서는 16진수를 흔하게 씁니다. 왜 그럴까요? 2진수를 쉽게 변환할 수 있고 또 2진수를 줄여서 쓸 수 있기 때문입니다. 32비트의 주소를 표현할 때 혹은 1024같이 비교적 크기 않은 값을 표현할 때 2진수로 표현하면 32비트 주소는 무려 32자리의 2진수를 써야합니다. 1024는 2^10이므로 0을 10개 써서 10000000000b로 써야합니다. 굉장히 불편합니다. 또 0의 갯수를 잘못 쓸 위험도 많아서 코드를 입력할 때 실수하기가 너무 쉽습니다.
+In the computer industry, hexadecimal numbers are common. Why? This is because binary numbers can be easily converted into hexadecimal and vise versa. When representing a 32-bit address you need 32 binary digits in binary. Since 1024 is 2 ^ 10, you should use ten zeros to write 10000000000b. It is very inconvenient. It is also very easy to make mistakes when typing code because there is a high risk of misplacing the number of zeros.
+
 
 그렇다고 10진수로 쓰려면 2진수의 각 자리가 몇번째 자리인지 계산해야합니다. 곱셈도 해야되고 덧셈도 해야되고 구구단을 해본지 한참된 머리나쁜 어른들에게는 너무 어렵습니다. 그래서 16진수를 고른 것입니다. 16진수를 2진수를 4개씩 끊어서 생각하면 되기때문에 비교적 간단합니다. 일이삼사는 쉽자나요?
 
+However, to write a decimal number, you have to calculate the number of digits of each digit of the binary number. Multiply by 2 and add 1 and ... it is too difficult. So hexadecimal number is picked. It is relatively simple because you can think of hexadecimal by breaking four binary digits.
+
+
 10100101b를 4개씩 끊으면 1010 과 0101입니다. 1010은 10이고 0101은 5입니다.16진수에서 10이라는 숫자가 있을까요? 아닙니다. 16진수에서 10은 A입니다. 16진수를 16개의 숫자가 있겠지요? 그런데 숫자는 10개뿐이므로 알파벳 a,b,c,d,e,f를 빌려와서 16개의 숫자를 표현합니다.
+If you cut four digits from 10100101b, it is 1010 and 0101. 1010b is 10 in decimal and 0101 is 5. Is there a 10 in hexadecimal? no. In hexadecimal, 10 is A. Is there more numbers bigger than 9? No. Since there are only 10 numbers, we borrow the alphabets a, b, c, d, e, and f to represent 16 numbers.
+
 
 10진수로 10은 a, 11은 b, 15는 f입니다. 대소문자는 상관없습니다.
-
 그래서 10100101b는 4개로 나눠서 A5가 됩니다.
 
+The decimal number 10 is A in hexadeimal, 11 is B, 15 is F. Case is not relevant.
+So 10100101b becomes A5.
+
 2진수의 숫자가 아무리 길어도 우리는 4개씩 나눠서만 생각하면 됩니다. 길고긴 32비트의 2진수를 4개씩 쪼개면 8자리 16진수로 나타낼 수 있습니다. 다시 말하면 하나의 니블이 16진수 한자리가 되는 것입니다.
+No matter how long the binary number is, we can only think of it as four. Splitting long 32-bit binary numbers into four can be represented as an 8-digit hexadecimal number. In other words, one nibble is a single hexadecimal digit.
+
 
 그리고 2진수를 b로 표시하는 것 같이 16진수로 h로 표시합니다. hexa-decimal이라는 표시입니다. 첫 자리가 알파벳이면 0을 붙이기도합니다. 그래서 A5는 0A5h라고 표시합니다. 또 C 언어에서는 0xA5라고 표시합니다. 0x가 16진수라는 표시입니다.
 
 다음은 10진수, 2진수, 16진수를 표로 보여줍니다.
 
+However, to write a decimal number, you have to calculate the number of digits of each digit of the binary number. It must be multiplied, it must be added, and it is too difficult for bad old men who have been playing games. So I picked a hexadecimal number. It is relatively simple because you can think of hexadecimal by breaking four binary digits. Is it easy to wor
+Hexadecimal is expressed by postfix h, as if the binary number is represented by b. h is for "Hexa-decimal". If the first digit is an alphabet, 0 is sometimes added as prefix. So A5 is displayed as 0A5h. In addition, C language code prefer 0xA5. "0x" means a hexadecimal number.
+
+The following table shows decimal, binary, and hexadecimal numbers.
+
 ```
-10진수    2진수    16진수
+decimal    binary    hexa
 0    0000    0
 1    0001    1
 2    0010    2
