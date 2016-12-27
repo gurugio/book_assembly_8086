@@ -103,7 +103,7 @@ No matter how long the binary number is, we can only think of it as four. Splitt
 However, to write a decimal number, you have to calculate the number of digits of each digit of the binary number. It must be multiplied, it must be added, and it is too difficult for bad old men who have been playing games. So I picked a hexadecimal number. It is relatively simple because you can think of hexadecimal by breaking four binary digits. Is it easy to wor
 Hexadecimal is expressed by postfix h, as if the binary number is represented by b. h is for "Hexa-decimal". If the first digit is an alphabet, 0 is sometimes added as prefix. So A5 is displayed as 0A5h. In addition, C language code prefer 0xA5. "0x" means a hexadecimal number.
 
-The following table shows decimal, binary, and hexadecimal numbers.
+The following table shows binary, and hexadecimal numbers of decimal numbers 0~15.
 
 ```
 decimal    binary    hexa
@@ -127,7 +127,7 @@ decimal    binary    hexa
 
 그럼 16진수의 값 1234h를 10진수로 바꿔보겠습니다. 16의 제곱수가 0에서 시작해서 하나씩 늘어난다고 생각하면 됩니다.
 
-1234h = 4\_16^0 + 3\_16^1 + 2\_16^2 + 1\_16^3 = 4660
+```1234h = 4 * 16 ^ 0 + 3 * 16 ^ 1 + 2 * 16 ^ 2 + 1 * 16 ^ 3 = 4660```
 
 4660을 16진수로 표시하는 것은 2진수처럼 16의 제곱수를 외워서하던가 나눗셈을 하면 됩니다.
 
@@ -145,12 +145,18 @@ Note that it is not very common to convert hexadecimal to binary or binary to de
 ## 부호의 표시 Sign
 
 지금까지 음수는 생각하지 않았습니다. 사실 컴퓨터는 음수를 인식하지 못합니다. 8비트의 연산을 생각해보겠습니다.
+We have not thought of negative numbers. In fact, computers do not recognize negative numbers.
+Let's think about an 8-bit operation.
 
 0FFh는 255일까요 아니면 -1일까요? 8비트 연산이라는 것은 0과 1이 8개 있다는 것입니다. 2진수로 0000000b에서 1을 빼면 값이 뭐가 될까요? 반대로 생각해보면 어떤 수에 1을 더하면 0이 될까요?
+Is hexadecimal 0FFh 255 or -1? An 8-bit operation is operation with 8 0's and 1's. What would be the value if you subtract 1 from 0000000b in binary? Conversely, what number will be 0 if you add 1 to it?
+
 
 정답은 11111111b입니다. 여기에 1을 더하면 00000000b가 됩니다. 8비트 연산이므로 원래는 100000000b이 되야하지만 1이 저장되지못하고 사라지는 것입니다. 그래서 -1은 11111111b입니다. 그럼 -2는 11111110b이고 -3은 11111101 입니다. -2에 2\(00000010\)를 더해보고 -3에도 3\(00000011\)을 더해보세요. 이렇게 계속 하다보면 -127은 10000001b입니다.
+The correct answer is 11111111b. Add 1 to it will be 00000000b. It should be 100000000b. Since 8-bit operation can store only 8-bits, the first 1 cannot be stored and disappears. So -1 is 11111111b. Then -2 is 11111110b and -3 is 11111101. Add 2 \ (00000010 \) to -2 and add 3 \ (00000011 \) to -3. Answer is always 0. Then finally we can realize that -127 is 10000001b.
 
 한가지 이상한건 -128은 10000000b이라는 겁니다. 양수로 128도 10000000b인데요. 여기서 우리는 한가지 약속을 합니다. MSB 즉 가장 왼쪽 비트가 1일때를 음수로 생각하자는 것입니다.
+One strange thing is that -128 is 10000000b. Actually binary number of 128 looks also 10000000b. Here we make one promise. If the MSB, the leftmost bit is 1, it is a negative number.
 
 그래서 8비트의 연산에서 양수는 00000000~01111111입니다. 0부터 127입니다.
 
@@ -167,4 +173,3 @@ Note that it is not very common to convert hexadecimal to binary or binary to de
 주1: 플립플롭이라는 디지털회로입니다. 디지털회로까지 알고싶으시면 전자공학까지 배워야합니다. 우리는 논리회로만 생각합니다. 논리회로에서는 1/0\(참/거짓\)만 생각합니다.
 
 주2: 윈도우나 리눅스나 모두 계산기에 프로그래머용 모드가 있습니다. 16,10,8,2진수의 계산을 쉽게 할 수 있습니다. 또 윈도우의 계산기에는 Byte, Word, Dword, Qword 모드가 있습니다. 각각 8비트, 16비트, 32비트, 64비트를 의미합니다.
-
