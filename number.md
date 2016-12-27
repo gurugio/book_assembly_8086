@@ -159,17 +159,32 @@ The correct answer is 11111111b. Add 1 to it will be 00000000b. It should be 100
 One strange thing is that -128 is 10000000b. Actually binary number of 128 looks also 10000000b. Here we make one promise. If the MSB, the leftmost bit is 1, it is a negative number.
 
 그래서 8비트의 연산에서 양수는 00000000~01111111입니다. 0부터 127입니다.
+The positive numbers in the 8-bit operation are 00000000 to 01111111. 0 to 127.
+
 
 음수는 11111111~10000000입니다. -1부터 -128입니다.
+Negative numbers are between 11111111 and 10000000. -1 to -128.
 
 8비트 00000000에 1을 계속 더해보세요. 0부터 시작해서 1, 2, 3 ... 127이고 그 다음은 -128이고 그 다음은 -127 그 다음은 -126 ... -1 그리고 다시 0이 됩니다.
+Continue adding 1 to 8 bits 00000000. Starting with 0, 1, 2, 3 ... 127, then -128, then -127 then -126 ... -1 and then 0 again.
+(Do you remember the Matrix?)
 
 이렇게 이상한 음수 표시가 있을 수 있는 것은 연산의 범위가 8비트로 제한되기 때문입니다. 일반적인 수학에서 자릿수가 제한되지는 않지요. 자리수는 무한대까지 늘어납니다. 하지만 컴퓨터에서는 프로세서가 저장할 수 있는 비트의 수가 제한됩니다. 16비트 컴퓨터 8086은 16비트까지만 저장할 수 있습니다. 즉 자릿수가 무한대가 되지 않고 숫자가 계속 증가하다가 다시 0이 되는 순간이 오기 때문에 최상위 비트 MSB가 1일 때를 음수로 정할 수 있습니다.
+This strange loop can exist because the scope of the operation is limited to 8 bits. The number of digits is not limited in general mathematics. The number of digits increases to infinity. However, in computers, the number of bits the processor can store is limited. A 16-bit computer 8086 can only store up to 16 bits. 
+In other words, since the numbers cannot continue to increase and become 0 finally, we can take it negative when MSB is 1.
 
-이상하게 생각되시면 8비트 숫자 뭐든지 계산을 해보세요. 이상하게 들어맞습니다. 처음에는 이상할 수 있습니다. 어셈블리 프로그래밍을 오래하다보면 생기는 병중에 숫자의 시작을 0으로 생각하는 것과 127다음이 -128이라고 생각해서 덧셈을 이상하게 하는 것이 있습니다.
+Please remember that there is no negative number in computer. 11111111b is not -1. But we take it -1 because 11111111b + 1 is 0.
+Sometimes 11111111b is 255 and sometime -1. But both of 255 + 1 and -1 + 1 are always 0 in 8-bit operation.
+Finally 255 is the same to -1 in 8-bit operation.
+
+You can define a "char" type variable and a "unsigned char" type in C or any programming language and print the binary or hexadecimal value. It must be the same.
+
+I'm from Asia. I'm familiar with Zen and meditation since I was born. If you're not, it's good time to start.
+EVERYTHING IS THE SAME ;-)
 
 ---
 
-주1: 플립플롭이라는 디지털회로입니다. 디지털회로까지 알고싶으시면 전자공학까지 배워야합니다. 우리는 논리회로만 생각합니다. 논리회로에서는 1/0\(참/거짓\)만 생각합니다.
+Note1: Please refer to digital circuit class.
 
-주2: 윈도우나 리눅스나 모두 계산기에 프로그래머용 모드가 있습니다. 16,10,8,2진수의 계산을 쉽게 할 수 있습니다. 또 윈도우의 계산기에는 Byte, Word, Dword, Qword 모드가 있습니다. 각각 8비트, 16비트, 32비트, 64비트를 의미합니다.
+Note2: Both of Windows and Linux calculator have programmer mode. It can print and convert binary, hexadecimal and octaldecimal. And it also have Byte, Word, Dword and Qword mode that are 8-bit, 16-bit, 32bit and 64-bit mode respectively.
+윈도우나 리눅스나 모두 계산기에 프로그래머용 모드가 있습니다. 16,10,8,2진수의 계산을 쉽게 할 수 있습니다. 또 윈도우의 계산기에는 Byte, Word, Dword, Qword 모드가 있습니다. 각각 8비트, 16비트, 32비트, 64비트를 의미합니다.
