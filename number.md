@@ -71,7 +71,7 @@ It does not matter whether you calculate for yourself or use a calculator. Of co
 Note that in the 8086 assembly language, each digit of a binary number is called a bit. 4 bits are one nibble and 8 bits are one byte. And 2 bytes are one word and 2 words are called as double word. The rightmost bit is called as the Least Significant Bit (LSB), and the leftmost bit is called as the Most Significant Bit (MSB).
 
 
-## 16진수
+## 16진수 Hexadecimal number
 
 컴퓨터 업계에서는 16진수를 흔하게 씁니다. 왜 그럴까요? 2진수를 쉽게 변환할 수 있고 또 2진수를 줄여서 쓸 수 있기 때문입니다. 32비트의 주소를 표현할 때 혹은 1024같이 비교적 크기 않은 값을 표현할 때 2진수로 표현하면 32비트 주소는 무려 32자리의 2진수를 써야합니다. 1024는 2^10이므로 0을 10개 써서 10000000000b로 써야합니다. 굉장히 불편합니다. 또 0의 갯수를 잘못 쓸 위험도 많아서 코드를 입력할 때 실수하기가 너무 쉽습니다.
 In the computer industry, hexadecimal numbers are common. Why? This is because binary numbers can be easily converted into hexadecimal and vise versa. When representing a 32-bit address you need 32 binary digits in binary. Since 1024 is 2 ^ 10, you should use ten zeros to write 10000000000b. It is very inconvenient. It is also very easy to make mistakes when typing code because there is a high risk of misplacing the number of zeros.
