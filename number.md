@@ -12,7 +12,7 @@ The number is older than the assembly. As Pythagoras said, the number is the pri
 
 We will understand how the computer was related to the number in near future. First you must know the binary number and hexadecimal number. When you write assembly code you should use the binary and hexadicimal. And every number emu8086 shows is the hexadecimal.
 
-## 10진수
+## 10진수 Decimal number
 
 우리는 10진수를 씁니다. 0부터 9까지의 숫자 표기를 이용해서 수를 표현합니다. 이 숫자를 여러개 붙여서 특정한 값을 표현합니다. 예를 들어 754는 각 자리마다 10의 지수승으로 이루어져있습니다.
 
