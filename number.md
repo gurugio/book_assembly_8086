@@ -52,9 +52,11 @@ The decimal number 754 has a power of 10 for each digit. Likewise, a binary numb
 반대로 165를 2진수로 표현하려면 어떻게 해야할까요? 중고등학교 수학시간에 배웠듯이 2로 나눠서 나머지를 나열하는 방법도 있습니다. 그보다 저는 165와 가장 가까운 2의 제곱수를 생각하는 방법을 좋아합니다.
 
 Conversely, how do you express 165 as a binary number? As you learned in school, there are ways to list the rest after dividing by 2. Rather, I like the way calculating the power of 2 which is the closest to 165.
+
+
+
 가장 먼저 165 = 128 + 37 라고 생각합니다. 128은 2^7인 것을 외우고 있기 때문입니다. 어셈블리 언어를 공부하다보니 2의 제곱수를 자연스럽게 많이 외우게 되었습니다.
 I think 165 = 128 + 37 first. Because 128 memorizes 2 ^ 7. As I studied assembly language, I was able to memorize the square of 2 naturally.
-
 
 
 165 = 2^7 + 37 이라면 그 다음으로 37 = 32 + 5 입니다. 32는 2^5 입니다. 그렇게 5도 4+1 이므로 2^2 + 1입니다. 결론은 165 = 2^7 + 2^5 + 2^2 + 2^0 입니다. 이걸 2진수로 바꾸는 방법은 제곱승의 숫자만큼 0을 붙이는 것입니다. 2^7은 0이 7개이므로 10000000b 입니다. 2^5는 0이 다섯개이므로 100000, 2^2는 100입니다. 다 더하면 10100101b 입니다.
