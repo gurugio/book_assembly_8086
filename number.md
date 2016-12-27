@@ -32,21 +32,28 @@ If the position is changed the number would be absolutely different. 574 is not 
 
 ## 2진수 Hexadecimal
 
-컴퓨터는 전자적으로 2가지 상태를 가진 물질로 이루어져있습니다. 전자적인 신호가 있으면 1 없으면 0의 상태를 가진 물질입니다.\(주1\) 그래서 0부터 9까지 10개의 숫자를 기억할 수 없습니다. 그래서 컴퓨터는 2진수를 사용하는 것입니다.
-
-
+컴퓨터는 전자적으로 2가지 상태를 가진 물질로 이루어져있습니다. 전자적인 신호가 있으면 1 없으면 0의 상태를 가진 물질입니다.\(주1\) 그래서 0부터 9까지 10개의 숫자를 기억할 수 없습니다. 그래서 컴퓨터는 2진수를 사용하는 것입니다
+The processor is made of materials with two states, 1 and 0. If there is an electronic signal, the state of the material become "1" or 0.(Note 1) So computer cannot count 10 numbers from 0 to 9. So the computer use binary numbers.
 
 2진수란 수를 나타내는 숫자 표기가 2개인 것입니다. 0과 1입니다. 10진수는 열개의 숫자 표기가 있었지요.
+Binary number is a numbering system that has two numbers 0 and 1 while the decimal number has ten digits.
 
 2진수와 10진수를 구분하기 위해서 우리는 보통 2진수의 숫자 뒤에 b라고 씁니다. 영어로 2진수가 binary이기 때문입니다.
+To distinguish between binary and decimal numbers, we usually write b after the binary number. Because the binary number is "binary" in English.
 
 2진수의 수 10100101b는 10진수로 몇일까요?
+What is the binary number 10100101b in decimal number?
 
 10진수 754는 각 자리마다 10의 제곱승을 했습니다. 마찬가지로 2진수도 각 자리마다 2의 제곱승을 하면 됩니다. 가장 오른쪽은 2의 0승, 한칸 왼쪽은 2의 1승 이렇게 자리가 올라갈때마다 2를 곱하면 됩니다.
+The decimal number 754 has a power of 10 for each digit. Likewise, a binary number can be raised to the power of two for each digit. The rightmost is 0 of 2, the left of 1 is 2, and so on.
 
-10100101b = 1\_2^0 + 1\_2^2 + 1\_2^5 + 1\_2^7 = 1 + 4 + 32 + 128 = 5 + 160 = 165
+```10100101b = 1*2^0 + 1*2^2 + 1*2^5 + 1*2^7 = 1 + 4 + 32 + 128 = 5 + 160 = 165```
 
 반대로 165를 2진수로 표현하려면 어떻게 해야할까요? 중고등학교 수학시간에 배웠듯이 2로 나눠서 나머지를 나열하는 방법도 있습니다. 그보다 저는 165와 가장 가까운 2의 제곱수를 생각하는 방법을 좋아합니다.
+
+
+
+
 
 가장 먼저 165 = 128 + 37 라고 생각합니다. 128은 2^7인 것을 외우고 있기 때문입니다. 어셈블리 언어를 공부하다보니 2의 제곱수를 자연스럽게 많이 외우게 되었습니다.
 
@@ -55,6 +62,18 @@ If the position is changed the number would be absolutely different. 574 is not 
 어떤 방법으로 계사하던지 아니면 계산기를 쓰던지 상관없습니다. 계산기가 제일 좋겠네요.
 
 참고로 8086 어셈블리 언어에서는 2진수의 각 자리를 비트bit라고 부릅니다. 4개의 비트는 니블nibble 8개는 바이트byte 2개의 바이트를 워드word 4개의 바이트를 double word라고 부릅니다. 그리고 가장 오른쪽 비트를 low bit 라고 부르거나 Least Significant Bit라고 부르고 가장 왼쪽 비트는 Most Significant Bit라고 부릅니다.
+
+
+Conversely, how do you express 165 as a binary number? As you learned in secondary school math, there are ways to list the rest by dividing by 2. Rather, I like the way I think about the square of 165 and the closest 2.
+
+I think 165 = 128 + 37 first. Because 128 memorizes 2 ^ 7. As I studied assembly language, I was able to memorize the square of 2 naturally.
+
+If 165 = 2 ^ 7 + 37 then 37 = 32 + 5. 32 is 2 ^ 5. So 5 is 4 + 1, so it is 2 ^ 2 + 1. The conclusion is 165 = 2 ^ 7 + 2 ^ 5 + 2 ^ 2 + 2 ^ 0. The way to convert this to binary is to add zero to the power of the square. 2 ^ 7 is 10000000b since there are seven zeros. 2 ^ 5 is 100000 and 2 ^ 2 is 100 because there are five zeros. Add everything to 10100101b.
+
+It does not matter whether you live in a house or use a calculator. The calculator is the best.
+
+Note that in the 8086 assembly language, each digit of a binary number is called a bit bit. 4 bits nibble 8 nibble byte byte 2 byte word word word 4 byte is called double word. The rightmost bit is called the low bit or the Least Significant Bit, and the leftmost bit is called the Most Significant Bit.
+
 
 ## 16진수
 
