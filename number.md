@@ -133,7 +133,16 @@ decimal    binary    hexa
 
 참고로 16진수나 2진수를 10진수로 바꿀 일은 별로 없습니다. 16진수와 2진수를 서로 바꿀 일은 많습니다만 10진수로 변환하려고 나눗셈을 몇번씩 하는 일은 드뭅니다. 가끔 필요할 때는 계산기를 이용하면 됩니다.\(주2\)
 
-## 부호의 표시
+Let's change the hexadecimal value 1234h to decimal.
+
+```1234h = 4 * 16 ^ 0 + 3 * 16 ^ 1 + 2 * 16 ^ 2 + 1 * 16 ^ 3 = 4660```
+
+To display 4660 as a hexadecimal number, you can repeat to either divide it by 16 or find the squared number closest to the hexadecimal.
+
+Note that it is not very common to convert hexadecimal to binary or binary to decimal. There is a lot of work to change between hexadecimal and binary numbers, but it is rare to do division several times to convert binary&hexadecimal to decimal. You can use the calculator when you need it occasionally.(note 2)
+
+
+## 부호의 표시 Sign
 
 지금까지 음수는 생각하지 않았습니다. 사실 컴퓨터는 음수를 인식하지 못합니다. 8비트의 연산을 생각해보겠습니다.
 
