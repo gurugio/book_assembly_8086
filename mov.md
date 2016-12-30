@@ -1,10 +1,15 @@
-#mov 명령어
+#mov 명령어 The first instruction: mov
 
 이제서야 실습을 하게 되었습니다. 16진수, 2진수와 8086 구조에 대한 글을 보면서 하나도 모르겠다고 생각하셔도 전혀 상관없습니다. 원래 처음 뭔가를 배운다는게 내가 뭘 모르는지 모르는 상태에서 뭘 모르는지 아는 상태로 옮겨가는 거라고 합니다. 이제 "16진수, 2진수, 8086의 구조에 대해서 모르겠다"라는 것을 아신 것입니다. 그러니 진일보한 것이지요.
 
 실습을 하면 16진수,2진수,레지스터들에 대해서 좀더 이해해보겠습니다.
 
 일단 emu8086의 압축을 풀었던 디렉토리를 열어봅니다. emu8086.exe 파일이 보이지만 지금은 emu8086.exe가 아니라 cmdhere.cmd 파일을 실행합니다. 그러면 터미널 창이 나타납니다. 아마 터미널을 처음 보신 분들도 계실것 같습니다. 당황하지않고 notepad라고 키보드로 칩니다. 그리고 엔터를 치면 메모장이 실행될 것입니다. 메모장에 실습할 어셈블리 명령어들을 입력합니다.
+Let's start the first exercise. It's ok if you do not understanding anything about hexadecimal, binary and 8086 structures discribed in privious chapters. The first thing to learn is always that you know what you do not know. Now you know that "I do not know about hexadecimal, binary, 8086 structure". So it is a step forward.
+
+Let's understand more about hexadecimal, binary, and registers with eu8086 in next chapters.
+
+Please run the emu8086. If you have the old version of emu8086, you might have the emu8086.exe file and cmdhere.cmd file. Please run the cmdhere.cmd file. A terminal window appears. Maybe some of you have seen the terminal for the first time. Do not afraid and type notepad with keyboard. And hit enter to run Notepad. In Notepad, type the assembly instructions you want to execute.
 
 ```
 mov ax, 1000
