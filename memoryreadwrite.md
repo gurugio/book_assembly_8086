@@ -34,10 +34,19 @@ ret
 그리고 에물레이터 화면의 밑부분에 있는 screen이라는 버튼을 누릅니다. 그럼 빈 화면의 윈도우가 나타나지요. 그리고 single step 버튼으로 프로그램을 ret까지 실행해봅니다. screen 화면에 A라는 핑크색 글자가 나타났나요?
 
 소스를 설명하겠습니다.
+Run Notepad, type this code, save it as var.txt, and run emu8086.exe var.txt in the terminal.
+
+Then press the button called screen at the bottom of the emulator window. Then a blank window appears. Then run the program with the single step button. Did you see the pink letter A on the screen?
+
+Let's read the source.
 
 처음에 org 100h는 죄송하지만 설명하지 않겠습니다. org 100h은 그냥 프로그램 처음에 무조건 넣는 걸로 하겠습니다. 굳이 간단하게 설명하자면 에물레이터를 처음 실행하면 ip가 100h인데 그렇게 프로그램이 100h 위치에서 실행한다는 것을 의미합니다. 왜 100h가 필요한지 왜 다른 값이 아니라 100h인지 등등 설명할게 많은데 사실 알아도 지금은 전혀 쓸모없는 지식입니다. 8086에서만 해당되는 내용이고 요즘 프로세서와는 상관없는 내용이므로 그냥 그렇게 쓰겠습니다.
 
 그 다음이 0b800h라는 주소를 ds에 저장합니다. 0b800h라는 값을 곧바로 ds 레지스터같은 세그먼트 레지스터에 곧바로 저장할 수는 없습니다. 8086 프로세서의 하드웨어적인 제약사항입니다. 그냥 프로세서가 그렇게 못하도록 만들어진 것입니다. 그래서 값을 바로 쓸 수 있는 범용 레지스터에 먼저 저장한 후에 레지스터의 값을 ds에 복사한 것입니다.
+At first there is ```org 100h``` but let's ignore it for now. ```org 100h``` will just be put in the beginning of the program unconditionally. Briefly whenever you run the emulator, ip is set to 100h by ```org 100h```. So the program will be placed at 100h. It does not matter why do we need 100h, not other values for now. You can skip it because this is only for 8086 and it is not related to the processor these days.
+
+It then stores the address 0b800h in ds. You can not immediately store a value of 0b800h directly into a segment register, such as a ds register. This is a hardware limitation of the 8086 processor. It's just that the processor is designed to prevent it from doing so. So we first store the value in a general-purpose register that can be written immediately, and then copy the value of the register to ds.
+
 
 그리고 ds가 또 나타나는 지점은 mov ds:[bx], cx입니다. 여기의 ds:[bx]라는 표현이 바로 메모리의 위치를 나타내는 표현입니다. 이전 글에서 메모리 주소는 세그먼트 주소와 범용 레지스터를 결합해서 나타낸다고 말씀드렸습니다. ds에는 0b800h 값이 있고 bx에는 15eh 값이 있으므로 ds:[bx]는 0b8000h + 15eh라는 주소를 말합니다. 그럼 [] 표시는 뭘까요? mov bx, cx는 bx 레지스터에 cx레지스터의 값을 복사하라는 명령입니다. bx에 메모리 주소가 있고 bx에 저장된 메모리 위치에 cx 값을 넣으라는 명령을 내리고 싶을 때는 bx에 []를 붙입니다. 그래서 결국 mov [bx], cx 혹은 mov ds:[bx], cx 가 됩니다. ds는 생략이 가능합니다. 프로세서가 알아서 메모리 주소를 계산할 때 ds를 읽습니다.(주1) mov [bx], cx로 바꿔서 실행해보세요. 결과는 같습니다.
 
