@@ -53,6 +53,11 @@ It then stores the address 0b800h in ds. You can not immediately store a value o
 그리고 cl에 'A'를 씁니다. 이건 화면에 출력할 문자입니다. '1'을 써도 되고 'a'를 써도 됩니다. 작은 따옴표는 그 문자의 아스키코드를 말하는데 아스키코드라는 것을 아신다면 이해하시면 되고 아니라면 그냥 'A'는 A라는 문자 자체를 의미한다고 생각하시면 됩니다.
 
 ch에는 이상한 값을 쓰는데 이것은 그냥 바탕은 핑크색 글자는 흰색이라는 것을 의미합니다.
+And ds appears again in ```mov ds:[bx], cx```. Here ```ds:[bx]``` is the representation of memory location. In the previous article, I mentioned that the memory address is represented by a combination of the segment address and the general purpose register. Since ds has a value of 0b800h and bx has a value of 15eh, ```ds:[bx]``` refers to the address 0b8000h + 15eh. And what is the [] for? ```mov bx, cx``` is a command to copy the value of the cx register to the bx register. If you have a memory address in bx and want to issue a command to put cx in the memory location stored in bx, wrap bx with []. So in the end it will be ```mov [bx], cx``` or ```mov ds:[bx], cx```. The ds can be omitted. When the processor calculates the memory address, it reads ds.(Note 1) Switch to mov [bx], cx. The result is the same.
+
+Then write 'A' to cl. This is the character to print on the screen. You can use '1' or 'a'. If the single quotes refer to the ASCII code of the character and you know it is an ASCII code, then you should understand that if you do not, just think of 'A' as the letter A itself.
+
+Ch is a strange value, which means that the background is just pink in pink.
 
 bx는 화면에서 어느 위치를 말합니다. 혹시 옛날 386AT 컴퓨터가 기억나시나요? 흑백 화면이나 녹색 화면일때도 있었고 브라운관 모니터였지요. 그때 화면은 지금의 윈도우처럼 그래픽이 출력되는 화면이 아니었습니다. 가로 80글자 세로 25글자만 출력할수 있었습니다. 그게 바로 지금 보시는 screen 화면입니다. 옛날의 화면 출력을 에물레이트해준 것이지요.
 
