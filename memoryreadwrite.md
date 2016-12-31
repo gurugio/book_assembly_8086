@@ -1,4 +1,4 @@
-#메모리 읽고 쓰기
+#메모리 읽고 쓰기 Read/Write memory
 
 데이터를 레지스터에 넣어봤습니다. 그런데 데이터가 여러개라면 어떻게 해야될까요? 주소록을 만들거나 수백명 학생들의 학점 관리를 해야하는데 몇개뿐인 레지스터를 가지고 처리할 수 없겠지요. 그래서 메모리에 데이터를 쓰고 읽고 해야합니다.
 
@@ -7,6 +7,15 @@
 다시한번 말씀드리겠습니다. 변수는 눈속임입니다. 컴퓨터는 이름을 모릅니다. a가 뭔지 모릅니다. 컴퓨터가 이해할 수 있는 것은 주소입니다. 주소는 숫자이니까 이해할 수 있습니다. (왜 수가 첫번째 글이 되었는지 납득이 되시나요? 모든게 수입니다!!)
 
 실습을 해볼까요? 쓸데없이 복잡합니다만 다 이해가 안되도 상관없습니다. 메모리 주소를 표현하는 방법만 생각하세요.
+
+We've put the data into a register. But what if you have multiple data? For example, If we need to create an address book or manage credit for hundreds of students, but all data can not handle it with just a few registers. So we have to write and read data in memory.
+
+In a normal programming language, we think of a variable as a name. In C, int a; Specify a variable with the name a, for example. But computers have no variables. Variables are names that are easy for people to remember. A variable is actually a specific location in memory. In C, you learn the concept of pointers, which is the memory address. In assembly language, data must be available only as pointers without variables. The assembler allows you to create variable names, which is actually a gimmick. It just changes a specific memory address to a variable name.
+
+I will tell you again. The variable is gimmick. The computer does not know the name. I do not know what a is. The computer can understand the address. Because the address is a number, I can understand it. (Do you understand why the number is the first one? Everything is number !!)
+
+Do you want to practice? It is unnecessarily complicated, but it does not matter if you do not understand everything. Just think about how to represent the memory address.
+
 
 ```
 org 100h
