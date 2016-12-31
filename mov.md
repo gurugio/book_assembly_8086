@@ -24,7 +24,7 @@ mov cx, 0ffffh
 일부러 화면을 캡처하지 않겠습니다. 한번 해보세요. 에물레이터 화면을 보면 왼쪽에 레지스터 값이 나타나고 오른쪽에는 메모리 값과 메모리에 있는 어셈블리 명령어가 나타납니다. 우리가 입력한 mov ax, 1000이 있나요? 아마 없을 겁니다. mov bx, 1000h는 있나요? 있습니다. 무슨 차이일까요?
 
 이전 글에서 프로세서는 2진수만 알 수 있고 어셈블리 명령에서는 2진수를 보기쉽게 만드는 16진수만을 쓴다고 말씀드렸습니다. 바로 지금 우리가 입력한 10진수가 16진수로 어셈블링되서 프로세서에 저장된 것을 볼 수 있습니다. 10진수 1000이 16진수로 3e8h입니다. 그래서 명령어 화면에 mov ax, 3e8h로 나타난 것입니다. 1000h는 16진수이므로 명령어 화면에 그대로 mov bx, 1000h로 나타납니다. 0ffffh도 마찬가지로 그대로 나타나구요.
-And save the file. You can use any file name but now let's make it mov.txt. Then type emu8086.exe mov.txt on the terminal window. Then emu8086 runs and our sample source appears in a text editor of emu8086. Just run the emulate menu.
+And save the file. You can use any file name, for instance mov.txt. Then type emu8086.exe mov.txt on the terminal window. Then emu8086 runs and our sample source appears in a text editor of emu8086. Just run the emulate menu.
 
 I will not capture the screen deliberately. Try it for yourself. It could be a little different for each version. On the emulator screen of the old version, register values ​​appear on the left, and memory values ​​and assembly instructions in memory appear on the right. Is there a "mov ax, 1000" we entered int the instruction list? Probably not. Is there "mov bx, 1000h"? There is. What's the difference?
 
