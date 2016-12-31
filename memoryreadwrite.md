@@ -10,11 +10,11 @@
 
 We've put the data into a register. But what if you have multiple data? For example, If we need to create an address book or manage credit for hundreds of students, but all data can not handle it with just a few registers. So we have to write and read data in memory.
 
-In a normal programming language, we think of a variable as a name. In C, int a; Specify a variable with the name a, for example. But computers have no variables. Variables are names that are easy for people to remember. A variable is actually a specific location in memory. In C, you learn the concept of pointers, which is the memory address. In assembly language, data must be available only as pointers without variables. The assembler allows you to create variable names, which is actually a gimmick. It just changes a specific memory address to a variable name.
+In a normal programming language, we think of a variable as a name. In C, ```int a;``` Specify a variable with the name a. But processor actually have no idea about variables. A variable is actually a name to specific location in memory. Programmers can remember the memory location because it has a name. In C, you learn the concept of pointers, which is the memory address. In assembly language, data must be available only as pointers, not name. The assembler allows you to create variable names, which is actually a gimmick. It just changes a specific memory address to a variable name.
 
-I will tell you again. The variable is gimmick. The computer does not know the name. I do not know what a is. The computer can understand the address. Because the address is a number, I can understand it. (Do you understand why the number is the first one? Everything is number !!)
+I will tell you again. The variable is gimmick. The processor does not know the name. It does not know what "a" is. The processor can understand only the address because the address is a number. (Do you understand why the number is the first one? Everything is number !!)
 
-Do you want to practice? It is unnecessarily complicated, but it does not matter if you do not understand everything. Just think about how to represent the memory address.
+Let's try an exercise. It is a little bit complicated, but it does not matter if you do not understand everything. Just think of code to represent the memory address.
 
 
 ```
