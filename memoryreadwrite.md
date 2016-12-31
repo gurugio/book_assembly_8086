@@ -55,9 +55,9 @@ It then stores the address 0b800h in ds. You can not immediately store a value o
 ch에는 이상한 값을 쓰는데 이것은 그냥 바탕은 핑크색 글자는 흰색이라는 것을 의미합니다.
 And ds appears again in ```mov ds:[bx], cx```. Here ```ds:[bx]``` is the representation of memory location. In the previous article, I mentioned that the memory address is represented by a combination of the segment address and the general purpose register. Since ds has a value of 0b800h and bx has a value of 15eh, ```ds:[bx]``` refers to the address 0b8000h + 15eh. And what is the [] for? ```mov bx, cx``` is a command to copy the value of the cx register to the bx register. If you have a memory address in bx and want to issue a command to put cx in the memory location stored in bx, wrap bx with []. So in the end it will be ```mov [bx], cx``` or ```mov ds:[bx], cx```. The ds can be omitted because ds is default segment register. When the processor calculates the memory address, it reads ds if no segment register is specified.(Note 1) Switch to ```mov [bx], cx```. The result is the same.
 
-Then write 'A' to cl. This is the character to print on the screen. You can use '1' or 'a'. If the single quotes refer to the ASCII code of the character and you know it is an ASCII code, then you should understand that if you do not, just think of 'A' as the letter A itself.
+Then 'A' is written to cl register. This is the character to be printed on the screen. You can use either of '1' or 'b'. The single quotes refer to the ASCII code of the character. If you don't know the ASCII code, just think of 'A' as the letter A itself.
 
-Ch is a strange value, which means that the background is just pink in pink.
+ch has a strange value, which means that the character will be white color on the pink color background.
 
 bx는 화면에서 어느 위치를 말합니다. 혹시 옛날 386AT 컴퓨터가 기억나시나요? 흑백 화면이나 녹색 화면일때도 있었고 브라운관 모니터였지요. 그때 화면은 지금의 윈도우처럼 그래픽이 출력되는 화면이 아니었습니다. 가로 80글자 세로 25글자만 출력할수 있었습니다. 그게 바로 지금 보시는 screen 화면입니다. 옛날의 화면 출력을 에물레이트해준 것이지요.
 
