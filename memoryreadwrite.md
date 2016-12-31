@@ -10,7 +10,7 @@
 
 We've put the data into a register. But what if you have multiple data? For example, If we need to create an address book or manage credit for hundreds of students, but all data can not handle it with just a few registers. So we have to write and read data in memory.
 
-In a normal programming language, we think of a variable as a name. In C, ```int a;``` Specify a variable with the name a. But processor actually have no idea about variables. A variable is actually a name to specific location in memory. Programmers can remember the memory location because it has a name. In C, you learn the concept of pointers, which is the memory address. In assembly language, data must be available only as pointers, not name. The assembler allows you to create variable names, which is actually a gimmick. It just changes a specific memory address to a variable name.
+In a normal programming language, we think of a variable as a name. In C, ``int a;`` Specify a variable with the name a. But processor actually have no idea about variables. A variable is actually a name to specific location in memory. Programmers can remember the memory location because it has a name. In C, you learn the concept of pointers, which is the memory address. In assembly language, data must be available only as pointers, not name. The assembler allows you to create variable names, which is actually a gimmick. It just changes a specific memory address to a variable name.
 
 I will tell you again. The variable is gimmick. The processor does not know the name. It does not know what "a" is. The processor can understand only the address because the address is a number. (Do you understand why the number is the first one? Everything is number !!)
 
@@ -43,7 +43,7 @@ Let's read the source.
 처음에 org 100h는 죄송하지만 설명하지 않겠습니다. org 100h은 그냥 프로그램 처음에 무조건 넣는 걸로 하겠습니다. 굳이 간단하게 설명하자면 에물레이터를 처음 실행하면 ip가 100h인데 그렇게 프로그램이 100h 위치에서 실행한다는 것을 의미합니다. 왜 100h가 필요한지 왜 다른 값이 아니라 100h인지 등등 설명할게 많은데 사실 알아도 지금은 전혀 쓸모없는 지식입니다. 8086에서만 해당되는 내용이고 요즘 프로세서와는 상관없는 내용이므로 그냥 그렇게 쓰겠습니다.
 
 그 다음이 0b800h라는 주소를 ds에 저장합니다. 0b800h라는 값을 곧바로 ds 레지스터같은 세그먼트 레지스터에 곧바로 저장할 수는 없습니다. 8086 프로세서의 하드웨어적인 제약사항입니다. 그냥 프로세서가 그렇게 못하도록 만들어진 것입니다. 그래서 값을 바로 쓸 수 있는 범용 레지스터에 먼저 저장한 후에 레지스터의 값을 ds에 복사한 것입니다.
-At first there is ```org 100h``` but let's ignore it for now. ```org 100h``` will just be put in the beginning of the program unconditionally. Briefly whenever you run the emulator, ip is set to 100h by ```org 100h```. So the program will be placed at 100h. It does not matter why do we need 100h, not other values for now. You can skip it because this is only for 8086 and it is not related to the processor these days.
+At first there is ``org 100h`` but let's ignore it for now. ``org 100h`` will just be put in the beginning of the program unconditionally. Briefly whenever you run the emulator, ip is set to 100h by ``org 100h``. So the program will be placed at 100h. It does not matter why do we need 100h, not other values for now. You can skip it because this is only for 8086 and it is not related to the processor these days.
 
 It then stores the address 0b800h in ds. You can not immediately store a value of 0b800h directly into a segment register, such as a ds register. This is a hardware limitation of the 8086 processor. It's just that the processor is designed to prevent it from doing so. So we first store the value in a general-purpose register that can be written immediately, and then copy the value of the register to ds.
 
@@ -53,7 +53,7 @@ It then stores the address 0b800h in ds. You can not immediately store a value o
 그리고 cl에 'A'를 씁니다. 이건 화면에 출력할 문자입니다. '1'을 써도 되고 'a'를 써도 됩니다. 작은 따옴표는 그 문자의 아스키코드를 말하는데 아스키코드라는 것을 아신다면 이해하시면 되고 아니라면 그냥 'A'는 A라는 문자 자체를 의미한다고 생각하시면 됩니다.
 
 ch에는 이상한 값을 쓰는데 이것은 그냥 바탕은 핑크색 글자는 흰색이라는 것을 의미합니다.
-And ds appears again in ```mov ds:[bx], cx```. Here ```ds:[bx]``` is the representation of memory location. In the previous article, I mentioned that the memory address is represented by a combination of the segment address and the general purpose register. Since ds has a value of 0b800h and bx has a value of 15eh, ```ds:[bx]``` refers to the address 0b8000h + 15eh. And what is the [] for? ```mov bx, cx``` is a command to copy the value of the cx register to the bx register. If you have a memory address in bx and want to issue a command to put cx in the memory location stored in bx, wrap bx with []. So in the end it will be ```mov [bx], cx``` or ```mov ds:[bx], cx```. The ds can be omitted because ds is default segment register. When the processor calculates the memory address, it reads ds if no segment register is specified.(Note 1) Switch to ```mov [bx], cx```. The result is the same.
+And ds appears again in ``mov ds:[bx], cx``. Here ``ds:[bx]`` is the representation of memory location. In the previous article, I mentioned that the memory address is represented by a combination of the segment address and the general purpose register. Since ds has a value of 0b800h and bx has a value of 15eh, ``ds:[bx]`` refers to the address 0b8000h + 15eh. And what is the [] for? ``mov bx, cx`` is a command to copy the value of the cx register to the bx register. If you have a memory address in bx and want to issue a command to put cx in the memory location stored in bx, wrap bx with []. So in the end it will be ``mov [bx], cx`` or ``mov ds:[bx], cx``. The ds can be omitted because ds is default segment register. When the processor calculates the memory address, it reads ds if no segment register is specified.(Note 1) Switch to ``mov [bx], cx``. The result is the same.
 
 Then 'A' is written to cl register. This is the character to be printed on the screen. You can use either of '1' or 'b'. The single quotes refer to the ASCII code of the character. If you don't know the ASCII code, just think of 'A' as the letter A itself.
 
@@ -75,7 +75,14 @@ And where is it printed in the third line? 350 - 320 = 30. And 2 bytes per chara
 우리가 여기에서 배워야할 것은 화면에 몇번째 위치냐가 아니고 메모리의 특정 위치를 지정하는 방법입니다. 다시한번 말씀드리면 ds:bx가 메모리 주소이고 레지스터 값을 읽는게 아니라 레지스터 값을 메모리 주소로 인식해서 메모리에 접근하라는 표현이 ds:[bx]입니다. 
 
 마지막에 있는 ret 명령어는 프로그램을 끝내는 명령입니다.
+It is natural that you do not understand and think it is difficult. It would be comforting to know how many people do not understand the concept of C language pointers and then give up computer science and change their major in electronics / electrical engineering. It is natural if you have never used mathematics in this way. How to printing a character does not matter. If you do not understand, just turn it over. You only need to know ``ds:[bx]``.
+
+What we need to learn here is not how many positions are on the screen, but how to specify a specific location in memory. Again, ``ds:[bx]`` is the expression that ``ds:bx`` is a memory address and not a register value.
+
+The final ret command is the command to end the program.
 
 ---
 
 주1: 메모리 주소가 저장된 레지스터라니 뭔가가 생각나지 않으세요? bx 레지스터가 바로 C언어에서 포인터의 역할을 하는 것입니다. 포인터는 그냥 읽으면 정수값이지요. 그런데 *를 붙이면 그 값을 메모리 주소로 인식해서 메모리에 접근하지요. C에서의 * 연산자가 어셈블리 언어에서 []가 되었습니다. 정확하게는 반대로 []가 C언어에서 *로 계승된 것입니다. 그거 아세요? C언어는 어셈블리 언어보다는 조금 쉬우면서 비슷하게 강력하고 자유로운 언어를 만들기위해서 생겨났습니다. 그래서 앞으로 어셈블리 언어를 공부하다보면 C언어가 다르게 보일 것입니다. 인간 컴파일러가 되서 C언어 코드를 보면 어떤 어셈블리 명령어에 해당되는지가 보일 것입니다. 매트릭스의 네오가 되는 것이지요.
+
+Note1: A regsister to store the memory address. Do not you remember something? Yes, the bx register is just a pointer to the C language. Pointers are just integer values when read. However, if you append an asterisk, it recognizes the variable as a memory address and accesses the memory. The ``*`` operator in C has become [] in the assembly language. To be precise, [] is inherited from C language to ``*``. Do you know that? The C language was created to make a language that is a bit easier for the assembly language programmer, but more powerful and flexible. So after you study assembly language, C language will look different. You will become a human compiler, you will see what assembly instructions correspond to C language code. It's becoming Neo of the Matrix.
