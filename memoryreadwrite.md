@@ -64,6 +64,11 @@ bx는 화면에서 어느 위치를 말합니다. 혹시 옛날 386AT 컴퓨터�
 옛날 화면에 하나의 문자를 출력할때는 2바이트의 값을 써야합니다. 화면 한 줄이 80개의 문자를 출력할 수 있으니까 한 줄당 160바이트입니다. 350은 몇번째 줄일까요? 첫번째 줄은 0~158, 두번째 줄은 160~318, 세번째 줄이 320~ 이므로 350이라는 값은 세번째 줄에 표시한다는 것입니다.
 
 세번째 줄에서 몇번째 칸일까요? 350-320은 30인데 한 문자당 2바이트입니다. 30은 15번째 위치를 말합니다.
+The bx register indicates a location of the character on the screen. Do you remember the old 386AT computer? It had black and white screen or green screen and it had a CRT monitor. At that time, the screen was not the screen where the graphic is displayed like the window of the present. It was able to print only 80 characters on a line and 25 lines on screen. That's the screen you see right now on the emulator. The emu8086 emulates the screen output of the old days.
+
+When printing one character on the old screen, you have to write 2 bytes. The screen is 160 bytes per line because a single line can output 80 characters. What is 15eh(350 in decimal)? The first line is 0 ~ 158, the second line is 160 ~ 318, the third line is 320 ~, so 350 is displayed on the third line.
+
+And where is it printed in the third line? 350 - 320 = 30. And 2 bytes per character. So 30 refers to the 15th position.
 
 이해가 안되고 어렵다고 생각하시는게 당연합니다. 얼마나 많은 사람들이 C언어의 포인터 개념을 이해하지 못해서 컴퓨터 공학을 포기하고 전자/전기 공학으로 전공을 바꾸는지 아신다면 위안이 되실겁니다. 태어나서 이런 식으로 수학을 사용해본 일이 없으니 당연한 일입니다. 그냥 ds:[bx]만 써넣으면 재미가 없을것 같아서 스크린에 글자 출력하는 소스도 넣어봤습니다. 이해가 안되시면 그냥 넘기세요. ds:[bx]만 알면 됩니다.
 
