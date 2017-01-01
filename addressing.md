@@ -3,6 +3,9 @@
 이전 글에서 ds:[bx]라는 가장 간단한 메모리 주소 표현 방법을 보았습니다. 이번에는 그 외에 어떤 방법들이 있는지를 보겠습니다.
 
 다음 테이블이 바로 메모리 주소의 모든 표현 방식을 모아놓은 것입니다.
+In the previous article, we have seen how to represent the simplest memory address ``ds:[bx]``. This article, let's see what else.
+
+The following table is a collection of all representations of memory address.
 
 ```
 [BX + SI]
@@ -11,7 +14,7 @@
 [BP + DI]	
 [SI]
 [DI]
-d16 (변수의 오프셋)
+d16 (offset of a variable)
 [BX]	
 [BX + SI + d8]
 [BX + DI + d8]
@@ -35,9 +38,14 @@ d8은 8비트의 숫자를 말하고 d16은 16비트의 숫자를 말합니다.
 
 가만히 보면 첫번째에 나오는 레지스터가 bx, bp이고 그 다음이 si,di 이고 그 다음이 숫자라는 규칙이 있는걸 알 수 있습니다. bx, bp의 이름이 베이스 레지스터, 베이스 포인터 레지스터라는 것을 보면 bx, bp는 항상 기본 주소를 나타낸다는 것을 알 수 있습니다. 또 si, di의 이름이 소스 인덱스 레지스터, 목적destination 인덱스 레지스터라는 것을 보면 베이스 주소에 더하는 인덱스라는 것이 생각납니다. C언어 하시는 분들은 뭔가 생각나는거 없으세요? 힌트는 배열입니다. (주1)
 
-
-
 실습 코드를 보겠습니다.
+
+d8 refers to an 8-bit number, and d16 refers to a 16-bit number.
+
+If you look at it carefully, you can see a sequence of the registers. The first register is bx, bp, then si, di and then the number. The full names of bx, bp are "base register" and "base pointer register", so bx, bp always indicate base address. Also, we know that the names of si and di are the "source index register" and the "destination destination index register", so we can think they has the index added to the base address. If you know C language, you might think of something similar. Yes, those are representations of the array. (Note 1)
+
+Let's take an example code.
+
 ```
 org 100h
 mov ax, 0b800h
