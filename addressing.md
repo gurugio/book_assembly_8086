@@ -68,6 +68,14 @@ ret
 첫번째로 메모리에 쓰는 명령어는 mov ds:[bx], cx입니다. 이때 ds값은 0b800h이고 bx 값은 0입니다. 세그먼트 주소 * 10h + 레지스터 값이 주소값이므로 0b8000h + 0h = 0b8000h 값이 주소 값입니다. 0b8000h 위치의 메모리에 'A'라는 값을 쓴 것입니다.
 
 그 다음 명령어는 [bx+2]입니다. 세그먼트 ds 값은 0b800h이고 레지스터 값 bx에 2가 더해졌으니 0b8000h + 0 + 2 = 0b8002h 가 주소 값이 됩니다. 앞에서 쓴 메모리 주소보다 2가 더해졌지요?
+Before you run it, think about how many times you will see the letter A on the screen while watching the code. How many instructions do you write to memory? There are four because there are four commands with [].
+
+So how many memory addresses are there?
+
+The first command to write to memory is ``mov ds:[bx], cx``. The ds value is 0b800h and the bx value is 0. "Segment address * 10h + register value" is the address value, so 0b8000h + 0h = 0b8000h is the address value. 'A' is written to memory at the address of 0b8000h.
+
+The next address expression is ``[bx + 2]``. The segment ds value is 0b800h and 2 is added to the register value bx, so 0b8000h + 0 + 2 = 0b8002h becomes the address value. It adds 2 to the privious memory address.
+
 
 그 다음은 bx+si인데 si에는 4라는 값이 있습니다. 그래서 0b8000h + 0 + 4 = 0b8004h이 메모리 주소가 됩니다. 그 다음은 bx+si+2 이므로 계산할 필요도 없이 0b8006h가 되겠지요.
 
