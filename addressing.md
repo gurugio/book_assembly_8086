@@ -87,9 +87,17 @@ The next address expression is ``[bx + 2]``. The segment ds value is 0b800h and 
 
 잘된다면 이번엔 안되는걸 해보세요. d8 위치에 16비트 값을 넣어보세요. 레지스터 2개를 이용하는 [bx + si] 형태말고 [ax + bx + cx] 같이 3개의 레지스터를 써보세요. 테이블을 보면 항상 첫번째 레지스터가 bx, bp, si, di 레지스터인데 ax나 cx같이 다른 레지스터를 써보세요. 어떻게 되나요?
 
+The next expression is ``bx + si``, where si valus is 4. So the address is 0b8000h + 0 + 4 = 0b8004h. The next one is ``bx + si + 2``, so it will be 0b8006h.
 
+Run the code now. How many pink A's are there?
+
+Are the pink A sticking together or apart?
+
+Try making a line of A with other forms not in the example. And then move on to the next line. If you continue to add 2 to the memory address, you can fill one line. Change the color and change the letters into different letters. You can change the color with changing the value of 11011111b to any value.
+
+If it works well, try wrong expression. Try placing a 16-bit value in d8. Write other three registers like ```[ax + bx + cx]``` instead of [bx + si] using two registers. In the table, the first register is always bx, bp, si, and di, but try another register like ax or cx. What happens?
 ---
 주1: 베이스 주소 + 인덱스 주소라는걸 보면 포인터 연산이 생각나야 합니다. 안그러면 C언어 개발자라고 하기에 부끄러운 겁니다. 진짜에요. 저도 포인터 연산을 생각못해서 절 가르쳐준 선배님에게 혼난 기억이 있거든요. *(p + 1), *(p + 3) 이런걸 생각해보세요. C언어가 왜 어셈블리 언어를 계승하는 언어인지 아시겠지요?
 
-
+Note1: If you're C language programmer, you must realize immediately that the expressions are same to pointer operations. Think about ``*(p + 1)`` or ``*(pp + 3) + 4 when p is a pointer and pp is a doube pointer. Please note that the C language is origianally designed for assembly programmer.
 
