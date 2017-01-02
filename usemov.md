@@ -3,13 +3,16 @@
 mov 명령의 사용법을 총정리해보겠습니다.
 
 일반적으로 메모리나 레지스터에 값을 읽고 쓰는 경우는 이렇습니다.
+Let's summarize the usage of the mov command.
+
+Followings are the common case when reading or writing values to memory or registers.
 
 ```
-MOV REG, 메모리주소
-MOV 메모리주소, REG
+MOV REG, [mem-address]
+MOV [mem-address], REG
 MOV REG, REG
-MOV 메모리주소, 상수
-MOV REG, 상수
+MOV [mem-address], constant
+MOV REG, constant
 ```
 
 
@@ -20,6 +23,14 @@ mov dx, [bx]를 하면 메모리에서 16비트 값을 읽어서 dx 레지스터
 그런데 한가지 주의할 것이 있습니다. mov [bx], 0ffh 라고 쓰면 어떻게 될까요?
 
 [bx]의 메모리에 00ffh의 16비트를 쓰려는 것일까요? 아니면 0ffh의 8비트 값을 쓰려는 것일까요? 알아보려면 역시 실험을 해봐야겠지요.
+
+"Reg" is a register, and the "constant" is a number, such as 0b800h.
+
+``Mov dx, [bx]`` reads the 16-bit value from the memory and stores it in the dx register.
+
+But there is one thing to watch out. Can you guess what ``mov [bx], 0ffh`` will do?
+
+Do you want to write 16 bits value of 00ffh at the memory address of bx? Or do you want to write an 8-bit value of 0ffh? Let's run an example to find out.
 
 ```
 org 100h
