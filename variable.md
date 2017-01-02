@@ -49,9 +49,16 @@ And on the right side of the emulator screen, it looks like ``mov al, [00108h]``
 
 바로 우리가 선언한 변수입니다. 우리가 변수들을 ret 명령 바로 다음에 선언했는데 그게 실제 프로그램에서도 ret 명령 바로 다음에 저장된 것입니다.
 
-이상한건 1234h를 저장했는데 왜 3412로 보인다는 것입니다. 이것은 little endian 이라는 규약입니다. 작은 인디언이 아니라 endian입니다. 반대로 big endian도 있습니다. little endian은 프로그램에서 메모리에 쓴 값을 반대 순서로 저장하는 것입니다. 16비트 1234h를 쓰면 34, 12 순서로 저장되고 32비트 12345678h을 저장하면 78, 56, 34, 12 로 저장됩니다. 메모리의 단위가 바이트이므로 87654321로 저장되는게 아니라 바이트 단위로 나눠져서 순서가 바뀝니다. 여러가지 이유가 있지만 자세한 것은 위키피디어등을 참고하시고 이 글에서는 일단 그렇다는 것만 알고 넘어가겠습니다. (주2) 두꺼운 전공책도 아니고 새로 나오는 개념들을 모두 설명하려고하면 끝이 없습니다. 핵심 줄기에 집중하겠습니다.
+이상한건 1234h를 저장했는데 왜 3412로 보인다는 것입니다. 이것은 little endian 이라는 규약입니다. 작은 인디언이 아니라 endian입니다. 반대로 big endian도 있습니다. little endian은 프로그램에서 메모리에 쓴 값을 반대 순서로 저장하는 것입니다. 16비트 1234h를 쓰면 34, 12 순서로 저장되고 32비트 12345678h을 저장하면 78, 56, 34, 12 로 저장됩니다. 메모리의 단위가 바이트이므로 87654321로 저장되는게 아니라 바이트 단위로 나눠져서 순서가 바뀝니다. 여러가지 이유가 있지만 자세한 것은 위키피디어등을 참고하시고 이 글에서는 일단 그렇다는 것만 알고 넘어가겠습니다. 두꺼운 전공책도 아니고 새로 나오는 개념들을 모두 설명하려고하면 끝이 없습니다. 핵심 줄기에 집중하겠습니다.
 
 우리가 소스 파일에 변수를 선언하면 프로그램에도 그 위치대로 변수가 생겨날까요? 이렇게 해보면 알겠지요.
+
+There are the variables we declared. We have declared the variables immediately after the ret command, which is stored immediately after the ret command in the actual program.
+
+The strange thing is that it looks like 3412 while we saved 1234h. This is called a little endian convention. It is not a little Indian ;-), but an endian. Conversely, there is a big endian. Little endian is to store the values ​​written to memory in reverse order by the program. When 16 bits 1234h is written, 34, 12 are stored in the order, and when 32 bits 12345678h are stored, 78, 56, 34, 12 are stored. Since the unit of memory is a byte, it is not stored as 87654321, but it is divided into bytes and its order is changed byte by byte. There are various reasons, but for the details, please refer to Wikipedia.
+
+When we declare a variable between source code, will the program have that variable in place? Let's try following code.
+
 ```
 ORG 100h
  
@@ -109,5 +116,4 @@ C 언어에서 포인터 변수를 읽어서 특정한 메모리 위치에 값�
 
 주1: unsigned short *p = 0xb8000; 이렇게 만들면 일일이 주소값을 쓰는 것보다 변수로 주소를 지정할 수 있겠지요.
 
-주2: little endian이라는 것을 모른다는 사실을 알았네요? 한걸음 걸었으니 little endian에 대해 알아봅시다. 그러면 모른다는 것도 모르는 상태에서 모른다는 것을 아는 상태가 되고, 또 뭔가를 아는 상태가 되는 것입니다.
 
