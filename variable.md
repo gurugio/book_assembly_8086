@@ -70,13 +70,20 @@ RET    ; stops the program.
  
 var2 DW 1234h
 ```
+
 에물레이터로 돌려보세요. mov al, var1 다음에 7 값이 보이나요? 그리고 al에 저장하려는 메모리의 주소값이 몇인가요?
+Can you see the 7 next to ``mov al, var1`` on the emulator? What is the address of the var1 that is stored in al register?
 
 ![](/assets/2525.png)
 
 다시 한번 말씀드리지만 컴퓨터는 변수 이름이 뭔지 모릅니다. 오직 숫자만 압니다. 103h라는 숫자를 주소값으로 넘겨주면 해당 메모리의 위치를 읽어서 레지스터로 가져오는 것입니다.
 
 그럼 변수 값 자체가 주소값이면 어떻게 될까요? 즉 포인터 변수를 흉내내보면 어떨까요?
+
+Again, the computer does not know what the variable name is. It only know numbers. If you pass the number 103h to the address value, processor will read the memory at 103h and bring it into the register.
+
+So what happens if the variable value itself is an address value? So how can we mimic a pointer variable?
+
 ```
 ORG 100h
  
