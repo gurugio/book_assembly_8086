@@ -43,6 +43,10 @@ ret 명령어에 해당하는 숫자는 C3입니다. C3 명령은 메모리 7107
 
 그리고 에물레이터 화면 오른쪽을 보면 mov al, [00108h] 라고 써진게 보입니다. [] 표시안에는 메모리의 주소가 들어간다고 말씀드렸습니다. 즉 al에 저장할 변수 var1의 주소가 ds:108h라는 것입니다. ds를 깜박하고 주소가 108h라고 생각할 수 있습니다. 항상 세그먼트 레지스터를 생각해야 합니다. ds의 값이 700h 이므로 최종 주소값은 7108h입니다. 
 
+The number corresponding to the ret command (AKA, machine code) is C3. The C3 value is stored in memory address 7107h. When the ret command is executed, the program is finished. You can see 07 and 3412 after the ret command.
+
+And on the right side of the emulator screen, it looks like ``mov al, [00108h]``. I mentioned that the address of memory is in []. That is, the address of the variable var1 to be stored in al is ``ds:108h``. You might forget ds and think of the address as 108h. But you should always think of segment registers when calculating the address. Since the value of ds is 700h, the final address value is 7108h. Check the value of address 7108h. Is it 07?
+
 바로 우리가 선언한 변수입니다. 우리가 변수들을 ret 명령 바로 다음에 선언했는데 그게 실제 프로그램에서도 ret 명령 바로 다음에 저장된 것입니다.
 
 이상한건 1234h를 저장했는데 왜 3412로 보인다는 것입니다. 이것은 little endian 이라는 규약입니다. 작은 인디언이 아니라 endian입니다. 반대로 big endian도 있습니다. little endian은 프로그램에서 메모리에 쓴 값을 반대 순서로 저장하는 것입니다. 16비트 1234h를 쓰면 34, 12 순서로 저장되고 32비트 12345678h을 저장하면 78, 56, 34, 12 로 저장됩니다. 메모리의 단위가 바이트이므로 87654321로 저장되는게 아니라 바이트 단위로 나눠져서 순서가 바뀝니다. 여러가지 이유가 있지만 자세한 것은 위키피디어등을 참고하시고 이 글에서는 일단 그렇다는 것만 알고 넘어가겠습니다. (주2) 두꺼운 전공책도 아니고 새로 나오는 개념들을 모두 설명하려고하면 끝이 없습니다. 핵심 줄기에 집중하겠습니다.
