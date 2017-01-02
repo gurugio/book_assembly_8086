@@ -1,8 +1,12 @@
-#변수
+#변수 Variable
 
 변수는 그냥 메모리의 위치입니다. 그런데 메모리의 위치는 숫자이고 숫자는 사람이 기억하기에 어렵지요. 그래서 어셈블러에서도 변수를 만들어서 쓸 수 있도록 해줍니다. 가만 생각해보면 이전 글에서 0b800h:0h 위치에 데이터를 썼는데요 이 메모리 번지를 변수로 만들어 놓으면 간편해지지 않을까요?(주1)
 
 일단 간단한 변수를 만들어보겠습니다. 백문이 불여일코라 백번 들어도 한번 코딩해보는게 더 잘 이해되지요. 다음 코드를 실행해보겠습니다.
+
+The variable is just the address of the memory. But the address of the memory is a number and the number is hard for us to remember. So the assembler and compiler allows you to use variables. We wrote the data at "0b800h:0h" in the previous article. Would not it be easy to make a variable indicate this memory address?
+
+Let's start with the simplest variable.
 
 ```
 ORG 100h
@@ -22,7 +26,15 @@ var2 DW 1234h
 
 간단하지요? 그런데 여기에 더 중요하게 봐야할 것이 있습니다. 변수는 메모리의 위치라고 말씀드렸습니다. 우리가 만든 var1, var2의 메모리 위치는 어디는 어디일까요? 우리는 메모리의 어디를 변수로 이름지은 걸까요?
 
+As I mentioned before, it is not case sensitive. VAR1 and va1 are the same. "DB" can be read as define byte or data byte. It declares a variable with one byte size. "DW" declares a word size variable.
+
+If you run the program with the emulator, you can see that the AL and BX values change to 7 and 1234h, respectively.
+
+Simple. But there is something more important here. I mentioned that the variable is the address of the memory. What are the memory addresses of var1 and var2? Where do we name the address of the memory?
+
 해답은 에물레이터에 있습니다. 우리가 만든 변수의 값이 7과 1234h입니다. 에물레이터 어딘가에 7과 1234가 보이면 그게 우리가 만든 변수의 위치입니다.
+
+The answer lies in the emulator. The values of the variables we created are 7 and 1234h. If you see 7 and 1234h somewhere in the emulator, that's the location of the variables we created.
 
 ![](/assets/2524.png)
 
