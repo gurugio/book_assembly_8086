@@ -105,9 +105,11 @@ Looking at the assembled code, it appears as ``mov word ptr [10fh], 1234h``. Why
 
 mov al, var1 의 어셈블링 코드는 mov al, byte ptr [var1] 이었습니다. 변수를 메모리 위치로 생각하는 것입니다. mov al, var1이 마치 var1 이라는 문자를 변수 값 7로 바꾸는 것처럼 보이지만 사실은 var1의 메모리 주소를 계산하고 그 다음 메모리에서 해당 주소값에 있는 데이터를 읽어오는 것입니다.
 
-The assembling code for ``mov al, var1`` is not ``mov al, 7`` but ``mov al, byte ptr [var1]``. Think of variables as memory locations. ``mov al, var1`` looks like it would pass the value in var1 into al directly, but in fact it is calculating the memory address of var1 and then reading the data from that address in memory.
+The assembling code for ``mov al, var1`` is not ``mov al, 7`` but ``mov al, byte ptr [var1]``. Think of variables as memory locations. ``mov al, var1`` looks like it would pass the value in var1 into al directly, but in fact it is calculating the memory address of var1 and then reading the data from that address in memory and store the data in the register.
 
 mov al, var1 과 mov al, byte ptr [var1] 이 같은 명령이라는게 이상하게 느껴질 수도 있습니다. 하지만 mov al, var1은 어셈블러가 인간이 보기 편하도록 제공하는 기능이라고 생각하고 원래 기계가 이해하는 문법은 mov al, byte ptr [var1]이라고 생각하셔야 합니다.
+
+The equality of ``mov al, var1`` and ``mov al, byte ptr [var1]`` may seem strange. However, ``mov al, var1`` is a translation that the assembler provides for human readability, and the syntax understood by the original machine is ``mov al, byte ptr [var1]``.
 
 그럼 변수에 주소 값일 저장하는 것은 어떻게 해야할까요? 소스 코드에도 써놓았듯이 bx레지스터에 주소 값을 저장하고 [bx] 명령으로 접근하면 됩니다.
 
