@@ -113,22 +113,29 @@ The equality of ``mov al, var1`` and ``mov al, byte ptr [var1]`` may seem strang
 
 그럼 변수에 주소 값일 저장하는 것은 어떻게 해야할까요? 소스 코드에도 써놓았듯이 bx레지스터에 주소 값을 저장하고 [bx] 명령으로 접근하면 됩니다.
 
+So how do you store a value in a memory? Save the address value in the bx register as you wrote it in the example source code and access it with the [bx] command.
+
 mov word ptr [addr], 1234h 명령이 실행되면 addr 변수에 1234h가 저장됩니다. 그리고 mov bx, addr 명령을 실행하면 bx 레지스터에 1234h 값이 저장됩니다. 그리고 마지막으로 ds:[bx] 위치에 1234h 값을 저장합니다.
+
+When the ``mov word ptr [addr], 1234h`` instruction is executed, 1234h is stored in the addr variable. And when ``mov bx, addr`` command is executed, 1234h value is stored in bx register. Finally, we store a value of 1234h in the ``ds:[bx]`` location.
 
 에물레이터의 aux 버튼을 눌러서 메모리 창을 열고 0700:1234 주소의 메모리를 확인해보세요. 34 12 라는 값이 나타날 것입니다.
 
-잠시 C 언어에 대한 이야기를 하겠습니다. C 언어에 관심없으신 분은 넘기셔도 좋습니다.
+Press the aux button on the emulator to open the memory window and check the memory at address 0700:1234. A value of 34 12 will appear.
 
 C 언어에서 포인터 변수를 읽어서 특정한 메모리 위치에 값을 쓰는 것을 간접 참조라고 부릅니다. 왜 간접일까요? 우리가 어셈블리 언어로 직접 만들었듯이 포인터 변수에 저장된 주소값에 접근하러면 우선 변수에 저장된 주소 값을 레지스터로 읽어와야 합니다. 그리고 레지스터 값을 이용해서 메모리에 접근할 수 있지요.
 
+In C, writing a value into a memory addressed by a pointer variable is called indirect reference. Why is it indirect? To access the address value stored in the pointer variable, as we did in the assembly language, you must first read the address value stored in the variable into the register. And then you can access memory using the register values.
+
 일반 변수는 한번에 접근됩니다. 변수의 주소를 알기때문이지요. 포인터 변수는 변수를 한번 레지스터로 읽어오고 그 다음에야 최종 접근하려는 위치에 접근됩니다. 이렇게 한번 더 메모리를 읽는 절차가 있기 때문에 간접 접근이라고 부르는 것입니다.
+
+Normal variables are accessed at once because we know the address of the variable and read the memory once. But for pointer, CPU read the pointer value into a register, and then read the final memory with the address in the register. There is one more memory access so that it's called as indirect reference.
 
 몇번째 말씀드리는건지 모르겠네요. C는 어셈블리의 확장판입니다!!
 
+Again. C is an extension of assembly!!
  
-
  
 
 주1: unsigned short *p = 0xb8000; 이렇게 만들면 일일이 주소값을 쓰는 것보다 변수로 주소를 지정할 수 있겠지요.
-
-
+Note1: ``unsigned short *p = 0xb8000;`` this is a way to store the address value in the variable.
