@@ -97,9 +97,15 @@ addr DW 120h
 ```
 소스를 보면 addr 변수가 있는데 120h 입니다. 즉 우리는 ds:[120h] 위치에 1234h 값을 저장하려는 것입니다. 에물레이터를 실행해보세요.  mov word ptr [addr], 1234h 명령이 우리가 생각했던대로 mov word ptr [120h], 1234h 로 어셈블링 되었나요? 아니니까 제가 물어본 것이겠지요.
 
+If you look at the source, you have the addr variable that is 120h. That is, we want to store the value 1234h in the ``ds:[120h]`` address. Run the emulator. The ``mov word ptr [addr], 1234h`` command assembled into ```mov word ptr [120h], 1234h`` as we wrote? No, that's why I asked.
+
 어셈블링된 코드를 보면 mov word ptr [10fh], 1234h로 나타납니다. 왜 그럴까요? 제가 바로 위에서 말씀드렸듯이 변수란 메모리 위치이기 때문입니다. addr이 위치한 메모리 주소가 몇인가요? 값 120h를 찾아보세요. little endian 규약에 따라 20, 01 이라고 써있겠지요. 바로 10fh 입니다. 변수는 값이 아니라 메모리 위치라는 것은 몇번을 강조해도 지나치지 않습니다.
 
+Looking at the assembled code, it appears as ``mov word ptr [10fh], 1234h``. Why? As I said above, this is because the variable is a memory location. What is the memory address the addr located at? Find the value 120h. According to the little endian convention, the numbers we should find are 20, 01. It's just at 10fh. As I emphasized already, a variable is not a value but a memory location.
+
 mov al, var1 의 어셈블링 코드는 mov al, byte ptr [var1] 이었습니다. 변수를 메모리 위치로 생각하는 것입니다. mov al, var1이 마치 var1 이라는 문자를 변수 값 7로 바꾸는 것처럼 보이지만 사실은 var1의 메모리 주소를 계산하고 그 다음 메모리에서 해당 주소값에 있는 데이터를 읽어오는 것입니다.
+
+The assembling code for ``mov al, var1`` is not ``mov al, 7`` but ``mov al, byte ptr [var1]``. Think of variables as memory locations. ``mov al, var1`` looks like it would pass the value in var1 into al directly, but in fact it is calculating the memory address of var1 and then reading the data from that address in memory.
 
 mov al, var1 과 mov al, byte ptr [var1] 이 같은 명령이라는게 이상하게 느껴질 수도 있습니다. 하지만 mov al, var1은 어셈블러가 인간이 보기 편하도록 제공하는 기능이라고 생각하고 원래 기계가 이해하는 문법은 mov al, byte ptr [var1]이라고 생각하셔야 합니다.
 
