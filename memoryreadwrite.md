@@ -66,7 +66,7 @@ bx는 화면에서 어느 위치를 말합니다. 혹시 옛날 386AT 컴퓨터�
 세번째 줄에서 몇번째 칸일까요? 350-320은 30인데 한 문자당 2바이트입니다. 30은 15번째 위치를 말합니다.
 The bx register indicates a location of the character on the screen. Do you remember the old 386AT computer? It had black and white screen or green screen and it had a CRT monitor. At that time, the screen was not the screen where the graphic is displayed like the window of the present. It was able to print only 80 characters on a line and 25 lines on screen. That's the screen you see right now on the emulator. The emu8086 emulates the screen output of the old days.
 
-When printing one character on the old screen, you have to write 2 bytes. The screen is 160 bytes per line because a single line can output 80 characters. What is 15eh(350 in decimal)? The first line is 0 ~ 158, the second line is 160 ~ 318, the third line is 320 ~, so 350 is displayed on the third line.
+When printing one character on the old screen, you have to write 2 bytes. The screen is 160 bytes per line because a single line can output 80 characters. What is 15eh(350 in decimal)? The offsets of characters on first line is 0,2,4...158, the second line is 160,162,164...318, the third line is 320..., so 350 is displayed on the third line.
 
 And where is it printed in the third line? 350 - 320 = 30. And 2 bytes per character. So 30 refers to the 15th position.
 
