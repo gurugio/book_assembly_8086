@@ -1,8 +1,12 @@
-#참과 거짓을 구별할때 쓰는 논리 연산
+#참과 거짓을 구별할때 쓰는 논리 연산 Logical operations used to distinguish between true and false
 
 컴퓨터로 판단해야할 때가 많습니다. 사용자가 마우스 클릭을 했는지 안했는지 키보드를 눌렀는지 안눌렀는지 엑셀에서 셀들의 합이 100을 넘는지 안넘는지 하나의 프로그램에 얼마나 많은 판단이 들어가는지 모릅니다.
 
 컴퓨터로 하는 판단을 논리 연산이라고 부릅니다. logic operation이라고 하는데 어떤 연산 결과가 내가 생각하는 결과와 같냐 다르냐를 판단하는 연산입니다. 루프를 예로 들면 10번 반복해서 화면에 'A'를 출력하고 싶을 때 현재 몇번 출력했는지를 기억해놨다가 10번이 되었는지 안되었는지를 판단해야합니다. 이럴때 횟수와 10을 비교해서 횟수가 10보다 작은지를 판단합니다. 이런게 논리 연산입니다.
+
+Often we have to judge with computer. Whether or not the user clicks the mouse, whether the keyboard is pressed or not, whether the sum of cells in Excel is over 100 or not, and we cannot guess how many decisions are made in one program.
+
+Judgment with computer is processed by logic operation. It is called as logic operation, and it is an operation that judges which operation result is the same as the result I expect. As an example, you want to print 'A' on the screen 10 times repeatedly in a loop, you need to remember how many times you have printed it, and then determine whether it prints 10 times or not. In this case, there is a assembly command to judge whether the number is less than 10. This is a logical operation.
 
 ##플래그 레지스터
 
