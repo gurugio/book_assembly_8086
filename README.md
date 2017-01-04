@@ -1,5 +1,8 @@
 # In the beginning was the Assembly
 
+Note. This document was written in Korean and now is on translating into English. Many of you must already realize that my mother language is not English. Please give me feedback if you find any stupid expression. You can send me via DISCUSSION menu in gitbook site and Issue menu in github site.
+
+
 컴퓨터 세계의 태초에 말씀이 있었으니 어셈블리 언어입니다.
 
 In the Beginning of the computer world, there is a Word. It's the Assembly language.  
@@ -50,7 +53,6 @@ I want more people to have the chance to see the other aspect of the computer wo
 
 I want to be _Morpheus who gave the Red Pill to Neo_ ;-\)
 
-PS. Many of you must already realize that my mother language is not English. Please give me feedback if you find any stupid expression. You can send me via DISCUSSION menu in gitbook site and Issue menu in github site.
 
 
 
