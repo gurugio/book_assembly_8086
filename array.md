@@ -4,12 +4,20 @@
 예를 들어 문자열은 바이트 배열입니다. 각각의 바이트는 출력하려는 문자의 ASCII 코드값을 나타냅니다. 1바이트 문자라는 변수들을 여러개 붙여놓은 것이지요.
  
 여기 배열을 선언하는 예를 보겠습니다.
- 
+
+Arrays can be viewed as contiguous variables. Continuous means that all variables are stored in contiguous memory. If you have an 8-bit variables at location 1000h, 1001h and 1002h, you can combine these three variables into a single array. An array is defined as a set of variables. For example, a string is a array of byte size variables. Each byte represents one ASCII code value of the character. It is a set of single-byte variables.
+
+Here is an example of declaring an array.
+
+```
 a DB 48h, 65h, 6Ch, 6Ch, 6Fh, 00h
 b DB 'Hello', 0 
+```
  
 b 는 a배열과 정확히 같습니다. 컴파일러는 따옴표안에 있는 문자열을 바이트의 집합으로 변경합니다. 아래 차트는 이 배열이 선언되었을 때 메모리를 보여줍니다. 문자열의 마지막은 문자가 아니라 0이라는 것에 주의하세요. 0은 문자열이 끝났다는 것을 말해줍니다. 0이 없다면 문자열을 읽다가 문자열이 언제 끝나는지 알수가 없으니까요.
- 
+
+Array b is exactly the same as an array a. The compiler changes the string in quotes to a set of bytes. The picture below shows memory when this array is declared. Note that the end of the string is 0, not a character. A value of 0 indicates that the string is finished. If you do not have a zero, you do not know where the string ends.
+
 ![](/assets/array.gif)
  
 배열의 원소는 []를 사용하여 접근할 수 있습니다. 예를 들면:
