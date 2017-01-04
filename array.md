@@ -38,24 +38,46 @@ MOV AL, a[SI]
 숫자 DUP ( 값(s) )
 숫자 - 복사할 횟수 (상수값이어야 함).
 값 - 복사할 데이터 
+
+Number DUP ( value(s) )
+Number: The number of copy (should be constant)
+value: data to copy
 ```
+
 예를 들어 
+For example,
+
 ``` 
 c DB 5 DUP(9)
 ```
+
 는 다음과 같습니다. 
+
+above is the same to following.
+
 ``` 
 c DB 9, 9, 9, 9, 9
 ``` 
  
 예를 하나 더 들면 
+
+For one more example
+
 ``` 
 d DB 5 DUP(1, 2)
 ``` 
 는 다음과 같습니다. 
+
+above is the same to following.
+
 ``` 
 d DB 1, 2, 1, 2, 1, 2, 1, 2, 1, 2
 ``` 
  
 물론, 255보다 크거나 -128보다 작은 값이 필요한 경우, DB 대신 DW를 사용할 수 있습니다. DW는 문자열을 선언할 때는 사용할 수 없습니다. 
 문자열과 메모리 접근을 배웠으니 스크린에 hello, world를 출력하는 예제를 한번 만들어보세요.
+
+Of course, if you need a value that is larger than 255 or less than -128, you can use DW rather than DB.
+DW cannot declare character string.
+Now you've learned how to use a string and memory addressing.
+Please make a program to print "hello, world" on screen.
