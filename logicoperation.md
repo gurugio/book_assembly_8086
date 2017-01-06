@@ -50,23 +50,13 @@ Sign Flag \(SF\) - 1 if the result is negative. When it is positive, it becomes 
 
 Overflow Flag \(OF\) - It becomes 1 when it overflows in operation between signed integer. For example, 100 + 50 is the case \(since the result range is not -128 ... 127\), it is different from Carry Flag.
 
-
-
-Parity Flag \(PF\) - Set to 1 if the bit value is an even number, and set to 0 if it is an odd number. The result is word, and even 8 low bits are analyzed.
-
-
+Parity Flag \(PF\) - Set to 1 if the bit value is an even number, and set to 0 if it is an odd number.
 
 Auxiliary Flag \(AF\) - Set to 1 if the unsigned integer nibble \(4 bits\) is overflow.
 
-
-
 Interrupt enable Flag \(IF\) - Set to 1 when the CPU responds to an interrupt by an external device.
 
-
-
-Direction Flag \(DF\) - This flag is used when the data chain is processed by an instruction. It is set to 0 when processing proceeds from the memory forward address to the backward address, and to 1 when the processing proceeds from the memory back address to the forward address.
-
-
+Direction Flag \(DF\) - This flag shows the direction of data processing instruction. It is set to 0 when processing proceeds from the memory forward address to the backward address, and to 1 when the processing proceeds from the memory back address to the forward address.
 
 ```
 org 100h
