@@ -12,7 +12,9 @@ Judgment with computer is processed by logic operation. It is called as logic op
 
 플래그 레지스터라는 것이 있습니다. 에물레이터를 실행해보면 아래쪽에 있는 버튼들 중에 가장 오른쪽에 flags라는 버튼이 있습니다. 이 버튼을 누르면 현재 플래그 레지스터의 상태를 보여줍니다.
 
-Before logical operation, we should know the flag register first. When you run the emulator, there is a button called flags on the most right size of the buttons at the bottom. Press this button to show the current flag register status.
+Before logical operation, we should know the flag register first. Flag register is 16bit register to show the result of operation.
+
+When you run the emulator, there is a button called flags on the most right size of the buttons at the bottom. Press this button to show the current flag register status.
 
 ![](/assets/cpu.gif)
 
@@ -74,11 +76,19 @@ ret
 
 예제를 실행하면서 어떤 플래그 비트들이 1로 바뀌는지 확인해보세요.
 
-## 논리 연산 명령어
+I added 100 and 50. By the way, 100 is in the al register and 50 is in the bl register. Each is an 8-bit register. So it is the addition of 8 bits values and the result is 150. Can you guess which flag will be set, overflow or carry? Since the register is not out of range, there is no carry and there is only overflow. A carry is result of an out of range operation.
+
+As you run the example line by line, check which flag bits change to 1.
+
+## 논리 연산 명령어 Instruction for logical operation
 
 논리 연산을 실행하는 CMP, AND, TEST, OR, XOR, NOT 명령어들을 하나씩 실험해보겠습니다.
 
 and, or, xor, not 명령어는 이름 그대로의 연산을 합니다. 예제를 실행해볼까요.
+
+Let's try the instructions for logical operation: CMP, AND, TEST, OR, XOR, NOT.
+The name of the instructions show what it does.
+Please run following example.
 
 ```
 org 100h
