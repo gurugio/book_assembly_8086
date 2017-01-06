@@ -56,7 +56,7 @@ Auxiliary Flag \(AF\) - Set to 1 if the unsigned integer nibble \(4 bits\) is ov
 
 Interrupt enable Flag \(IF\) - Set to 1 when the CPU responds to an interrupt by an external device.
 
-Direction Flag \(DF\) - This flag shows the direction of data processing instruction. It is set to 0 when processing proceeds from the memory forward address to the backward address, and to 1 when the processing proceeds from the memory back address to the forward address.
+Direction Flag \(DF\) - This flag shows the direction of data processing instruction. It is set to 0 when processing proceeds from the memory low address to the high address, and to 1 when the processing proceeds from the memory high address to the low address.
 
 ```
 org 100h
