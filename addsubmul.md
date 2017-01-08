@@ -1,5 +1,8 @@
-#덧셈,뺄셈,곱셈
+#덧셈,뺄셈,곱셈 ADD, SUB, MUL
+
 사칙연산은 기본이겠지요. add, sub, mul, imul, div, idiv, inc, dec, neg 명령들이 사칙연산과 관련있습니다.
+
+There are arithmetic operation: add, sub, mul, imul, div, idiv, inc, dec, neg.
 
 ```
 org 100h
