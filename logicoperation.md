@@ -119,9 +119,16 @@ ret
 
 1 and 0, 1 or 0, 1 xor 0, not 1, not 0 연산을 한번씩 실험해보는 소스입니다.
 
+Above example does the operations of "1 and 0", "1 or 0", "1 xor 0", "not 1", "not 0" to show what each operation do.
+
 1 and 0의 결과는 뭔가요? and 연산이라는 것은 두가지 모두 참이어야 결과가 참이되고 하나라도 0이면 거짓인 연산입니다. 따라서 1 and 0은 0이지요. 실험을 하면서 잘 봐야할 것은 레지스터 값이 어떻게 바뀌느냐와 어떤 플래그가 바뀌느냐 입니다. ax가 1이고 bx가 0인 상황에서 and ax, bx 명령의 결과값인 0이 어디에 저장되나요? ax입니다. ax의 값이 1에서 0으로 바뀌었습니다. 그리고 zero 플래그가 1로 바뀌었습니다. 연산 결과가 0이니까요. 그 외에 overflow나 carry는 변하지 않습니다. and ax, bx를 and bx, ax로 바꿔서 해보세요. 결과값이 어디에 저장될까요? and ax, bx를 실행할 때와 상태 플래그가 같나요?
 
 test 명령은 약간 특이한 명령입니다. 하는 일은 and와 동일한데 차이는 레지스터의 값을 바꾸지 않습니다. 상태 레지스터만 바꿉니다. 그래서 test입니다. 값이 같은지 0이 아닌지를 테스트하는 것입니다. test ax, ax 이렇게 같은 레지스터를 테스트하면 레지스터의 값이 0인지를 확인하겠다는 것이고, test ax, 1 로 실행하면 ax 레지스터의 값이 1인지 0인지를 확인하는 것입니다. test ax, 1 명령이 실행되고 zf가 1이되면 \(ax and 1\)의 결과값이 0이라는 뜻이니까 ax가 0이겠지요?
 
 흥미유발?을 위해서 다른 명령어에 대한 설명은 하지 않겠습니다. 직접 해보세요. 문서로 백장 천장 쓰고 읽어봐야 한번 실행해서 이것저것 실험해보는것만 못합니다.
 
+What is the result of "1 and 0"? The AND operation must be true if the both of operand are true, or false. So 1 and 0 are 0. What you need to look at during the experiment is how the register values and flag ​​change. When ax is 1 and bx is 0, where is the resulting value of "ax AND bx" stored? AX. The value of ax has been changed from 1 to 0. And the zero flag has been changed to 1 because the result of the operation is zero. In addition, overflow and carry do not change. Try replacing and ax, bx with and bx, ax. Where will the results be stored? And what happens to flag register?
+
+The test command is a somewhat unusual command. Same as and, but the difference does not change the value of the register. Only the status register is changed. So it is test. It is to test whether the values ​​are equal or not zero. Test ax, ax If you test a register like this one, it will check whether the value of the register is 0. If you run test ax, 1, it checks whether the value of ax register is 1 or 0. If the test ax, 1 command is executed and zf is 1, the result of \ (ax and 1 \) is 0, so ax will be 0?
+
+I will not explain any other commands for interest. Try it yourself. I have to read the ceiling of the pagoda as a document and read it.
