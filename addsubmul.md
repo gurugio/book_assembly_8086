@@ -20,6 +20,10 @@ ret
 
 add와 sub는 설명이 필요없겠지요?
 다음은 mul, imul을 실험해보겠습니다.
+
+No need to explain ADD and SUB.
+Next is for MUL and IMUL.
+
 ``` 
 org 100h
  
