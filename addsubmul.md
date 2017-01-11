@@ -22,7 +22,7 @@ add와 sub는 설명이 필요없겠지요?
 다음은 mul, imul을 실험해보겠습니다.
 
 No need to explain ADD and SUB.
-Next is for MUL and IMUL.
+Next are for MUL and IMUL.
 
 ``` 
 org 100h
@@ -60,6 +60,30 @@ ret
 
 이전 글에서 ax 레지스터의 이름이 accumulate register 이고 계산에 사용되는 레지스터라고 소개했습니다. 이렇게 mul이나 div에서 ax 레지스터를 무조건 사용하기 때문에 계산에 특화된 레지스터라고 말씀드린 것입니다.
 
+First things first. The size of one register is 16 bits. How many bits will be the result when the we multiply two values in two registers?
+
+16 bits value is multiplied by 16 bits, that will be 32 bits. 2^16 * 2^16 = 2^(16+16) = 2^32. 
+What I mean is that when you want to multiply 16bits values, you need 32 bits to store the result. 
+Where can we store the result? Where is 32bits register?
+
+The multiply operation uses an additional register that are not visible to the instruction.
+
+First, let's take a look at the command "mul bl".
+The bl register is 8bits, so the result should be stored in 16bits register.
+The numbers to be multiplied are in al and bl registers.
+Yes, the al register is not specified in the command.
+But mul instruction uses al for multiplication explicitely.
+Where will the result value be stored?
+Since 16 bits are required, the entire 16-bit register ax is used to store the result value.
+Multiplying 90h and 90h is 5100h in hex.
+Check the values in registers after run "mul bl" instruction.
+51 and 00 are stored in ah and al, respectively.
+
+In the previous article, ax register was introduced as the accumulate register and used in the calculation mainly,
+because ax register is used by mul and div instruction.
+
+
+
 그 다음으로 mul bx 명령은 ax와 bx를 곱하는 명령입니다. ax와 bx를 곱하면 32비트의 결과값이 나오는데 ax는 16비트입니다. 나머지 16비트는 어디에 저장될까요? 흥미를 위해 답을 알려드리지 않겠습니다. 에물레이터로 실험해보면 어떤 레지스터에 100h값이 나타납니다. 1000h * 1000h는 1000000h입니다. 이 값을 16비트씩 끊어보면 상위 16비트는 100h이고 하위 16비트는 0000h입니다. 상위 16비트가 저장되는 레지스터에는 100h가 저장되고 하위 16비트가 저장되는 ax에 0000h가 저장됩니다.
 
 설명이 좀 길고 주절주절했습니다만 mul명령에 대해 두가지만 기억하시면 됩니다. 8비트 연산을 때는 ax레지스터가 자동으로 사용된다는 것과 16비트 일때는 dx도 사용된다는 것입니다.
@@ -71,3 +95,4 @@ ret
 0ffffh는 -1입니다. -1에 -1을 곱하면 1입니다. 1이 되나 해보세요. 만약에 0fffe0001라면 부호없는 곱하기가 되는 것이고 1이라면 부호있는 곱하기 입니다. dx 값이 0인지 0fffeh인지 확인해보시기 바랍니다.
 
 마지막이 부호없는 0ffffh와 0ffffh의 곱셈입니다. -1과 -1의 곱셈과 다른지 확인해보세요.
+
