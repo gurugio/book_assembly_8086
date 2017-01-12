@@ -96,3 +96,18 @@ because ax register is used by mul and div instruction.
 
 마지막이 부호없는 0ffffh와 0ffffh의 곱셈입니다. -1과 -1의 곱셈과 다른지 확인해보세요.
 
+Next, the ``mul bx`` command multiplies ax and bx. If you multiply ax and bx, the result will be 32 bits while ax is 16 bits. Where will the other 16 bits be stored? 1000h * 1000h is 1000000h. The upper 16 bits are 100h and the lower 16 bits are 0000h. The upper 16bits value, 100h, is stored in dx register. And lower 16bits value, 0000h, is stored in ax.
+
+The conclusion is, for 8-bit operations, the ax register is used implicitly, and for 16-bit, dx and ax registers are used.
+
+Now let's look at imul. The imul instruction does a multiplication of signed values while the mul performs an multiplication without considering the sign. But imul considers the sign. Again, if the leftmost bit is 1, it is negative. If 0, it is positive.
+
+Let's multiply 20 and -20. There is -20 in the code, but the computer does not know the - sign. Look at how the -20 appears in the emulator. The emulator shows 0ffech. 20 is 14h. 0ffech + 14h is 0, so 0ffech is -20, right?
+The result of ``imul bx`` must be negative. And the result must be stored in dx and ax. So what is the dx value? It is 0ffffh. And ax?
+It is 0fe70h. So the 32bits result is 0fffffe70h.
+The sign bit is 1. So it is a negative number. 400 is 190h in hexadecimal. Add 190h to 0fffffe70h. It's 100000000h.
+However, due to the constraint of 32 bits, the most left value should be ignored. So the final result is 0fffffe70h that is -400 in decimal.
+
+Next code is the signed multiplication of 0ffffh and 0ffffh. 0ffffh is -1. If -1 is multiplied by -1, it is 1. Please try it. If the result is 0fffe0001h, it means that you did an unsigned multiplication. If the result is 1, you did a signed multiplication. Please check whether dx value is 0 or 0fffeh.
+
+The final code is the unsigned multiplication of 0ffffh and 0ffffh. Is is (-1 * -1) or (0ffffh * 0ffffh)?
