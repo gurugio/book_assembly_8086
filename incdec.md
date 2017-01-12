@@ -1,7 +1,18 @@
-#변태 명령어 inc, dec
+# inc and dec
 
 inc는 1을 증가하는 명령이고 dec는 1을 감소하는 명령입니다. 이 명령이 왜 필요할까요? 카운트때문입니다.
 
 C에서 ++, --가 있는데 inc와 dec로 컴파일됩니다. C에서 왜 ++, --라는 연산자를 만들었을까요? 바로 inc, dec를 그대로 사용하기 위해서입니다. ++, --라는 연산자를 당연하게 쓰고 있지만 수학 기호중에 ++,--라는건 없습니다. 즉 뭔가 이유가 있어서 굳이 집어넣은 연산자입니다. inc,dec 어셈블리 명령을 사용하기 위해서 굳이 언어적으로는 말이 안되는 연산자를 만든 것입니다.
 
 그만큼 inc,dec는 빠릅니다. 또 1씩 증가/감소하는 연산은 너무나 많이 쓰이지요. 프로세서를 만들 때도 1씩 증감하는 것이 많이 쓰이기때문에 inc,dec라는 명령을 만들었고 C언어를 만들 때도 ++,--를 만든 것입니다.
+
+The inc instruction increases the value by 1 and dec decreses the value by 1.
+
+In C programming language, ``++`` and ``--`` operators are compiled into inc and dec instructions, respectively.
+Why are ``++`` and ``--`` operators included in C language?
+``++`` is faster than ``add cx, 1`` in the old processors. ``--`` is faster than dec instruction.
+
+Why does processor support inc and dec instruction?
+Because adding by 1 and substracting by 1 are very very common.
+The inc and dec operations are not used so many times only for arithmatic calculation code but also loop code, array accessing, pointer operation and so on.
+Therefore fast increasing by 1 and fast decresing by 1 are necessary.
