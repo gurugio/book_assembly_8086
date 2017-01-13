@@ -1,8 +1,10 @@
-# 필요할 때만 점프하기
+# conditional jump: jump if necessary
 
 jmp 명령이 무조건으로 점프를 하는데 어떤 상태가 되었을 때만 점프를 하는 명령어도 있습니다. 3종류가 있는데 하나는 프로세서의 상태 비트를 확인해서 점프를 하는 것이고 두번째는 부호가 있는 숫자를 비교해서 점프를 하는 것이고 마지막은 부호없는 숫자의 비교 결과로 점프를 하는 것입니다.
 
-## 플래그 상태를 보고 점프하기
+While jmp instruction does jump unconditionally, there is other jump instructions that do jump only-if a certain condition meets. There are three kinds of condition: according to flag register, signed number operation and unsigned number operation.
+
+## jump according to flag register 플래그 상태를 보고 점프하기
 
 다음 표는 프로세서 상태 플래그에 따라서 점프를 하는 명령어들의 표입니다. 그런데 어떤 명령어들의 설명을 보면 0일때 혹은 같을때라는 설명이 있습니다. 같은 것과 0인게 무슨 관계이길래 이거나 저거나 같다는 설명을 할까요?
 
@@ -10,18 +12,30 @@ jmp 명령이 무조건으로 점프를 하는데 어떤 상태가 되었을 때
 
 물론 sub cx, 10 명령으로 빼기를 하면 cx 값이 바뀌겠지요 그래서 빼기는 하되 값은 안바꾸는 cmp 명령도 있습니다. 어쨌든 sub, xor 같이 레지스터 값을 0으로 만드는 연산을 하게되면 zf 플래그가 1이 됩니다. 그래서 루프를 다 돌았는지, 원하는 결과값이 나왔는지 안나왔는지 등을 확인할 수 있게 됩니다. 그리고 그런 상황에 따라 점프를 하게 되는 것이지요. 루프를 다 안돌았으면 다시 루프의 시작 명령으로 점프를 하면 되고, 원하는 값이 안나왔으면 에러 처리로 점프하면 되는 것입니다.
 
-| 명령어 | 설명 | 조건 | 반대명령어 |
+The following table shows the instructions that jump according to the processor flag register.
+However, some commands are described as "jump if 0 or equal".
+What is the relationship between 0 and equal?
+
+A comparison of numbers means that you subtract two numbers. For example, if you want to loop 10 times, put 0 in cx and increment cx by one at each loop.
+And how can we check cx value reaches 10?
+We subsract 10 from cx value. If cx is 10, the zf flag bit will be 1, and you can see that the cx value is 10.
+
+Of course, subtracting with ``sub cx, 10`` command will change cx value, so there is also cmp command to subtract without change.
+So "if 0" is the same to "equal".
+
+
+| instruction | desciption | condition | opposite |
 | :--- | :--- | :--- | :--- |
-|jz, je|	0일때(같을때) 점프	|zf=1|	jnz,jne
-|jc, jb, jnae|      각각 캐리가 생겼을때, 작을때, 크거나 같지 않을때 점프    cf=1   | jnc, jnb, jae  |
-|js           |   계산 결과 부호 비트가 켜졌을 때 점프  |  sf=1 |   jns  |
-|jo |   오버플로우가 발생했을 때 점프   | of=1   | jno | 
-|jpe, jp|    Parity Even 상태가 되었을 때 점프  |  pf=1  |  jpo  |
-|jnz, jne|    0이 아니거나 같지 않을 때 점프  |  zf=0  |  jz, je | 
-|jnc, jnb, jae|    캐리가 없을때, 작지 않을때, 크거나 같을 때 점프  |  cf=0 |   jc, jb, jnae  |
-|jns|    부호 비트가 0일 때 점프  |  sf=0  |  js | 
-|jno|    오버플로우가 아닐 때 점프  |  of=0  |  jo  |
-|jpo, jnp|    Parity Odd 상태일 때 점프 |   pf=0  |  jpe, jp  |
+|jz, je|	if 0 or equal 0일때(같을때) 점프	|zf=1|	jnz,jne
+|jc, jb, jnae|      if carry, less, not above and equal 각각 캐리가 생겼을때, 작을때, 크거나 같지 않을때 점프 | cf=1   | jnc, jnb, jae  |
+|js           |  sign bit turned on after calculation 계산 결과 부호 비트가 켜졌을 때 점프  |  sf=1 |   jns  |
+|jo |   jump if overflow bit sets 오버플로우가 발생했을 때 점프   | of=1   | jno | 
+|jpe, jp|    jump if Parity Even 상태가 되었을 때 점프  |  pf=1  |  jpo  |
+|jnz, jne|   if not 0 or not equal 0이 아니거나 같지 않을 때 점프  |  zf=0  |  jz, je | 
+|jnc, jnb, jae|   no carry, not below, above or equal 캐리가 없을때, 작지 않을때, 크거나 같을 때 점프  |  cf=0 |   jc, jb, jnae  |
+|jns|    if sign bit is 0 부호 비트가 0일 때 점프  |  sf=0  |  js | 
+|jno|    if overflow bit is 0오버플로우가 아닐 때 점프  |  of=0  |  jo  |
+|jpo, jnp|   if Parity Odd 상태일 때 점프 |   pf=0  |  jpe, jp  |
 
 
 크거나 같지 않다는 것은 작다는 것이고 작지 않다는 것은 크거나 같다는 것입니다. 필요에 따라 어떤 상황을 쓸것인지 결정하면 됩니다.
@@ -31,16 +45,39 @@ jmp 명령이 무조건으로 점프를 하는데 어떤 상태가 되었을 때
 다음 코드를 에물레이터로 실행해보면 모두 jnb 명령으로 어셈블되는 것을 볼 수 있습니다. jnb 명령의 기계 코드는 2바이트로 제한되어있는데 jnb 명령 자체가 73h로 1바이트입니다. 따라서 주소를 표현할 수 있는 자리가 1바이트만 남으므로 점프할 수 있는 범위가 1바이트가 됩니다. 1바이트라면 부호를 고려했을 때 -128~127이므로 명령어가 있는 위치로부터 위로 128바이트까지 되돌아 올라갈 수 있고 127바이트까지 아래로 내려갈 수 있게 됩니다.
 
 즉 이번에 설명된 점프 명령들은 16비트 점프가 아닌 8비트 점프들입니다.
+
+"not above and equal" is the euqal to "below". "not below and equal" is the equal to "above".
+
+There are commands that do the same thing, but have different names like jz, je.
+These commands have the same machine code.
+So even though I have written jz in my code, it can be displayed as je on the emulator.
+Jc and jb are the same commands too.
+
+Thos instructions, which has the different names but do the same, exist for the programmer to understand the code.
+But tools like emulators and disassemblers do not know programmer's intend and translate the machine code mechanically.
+
+If you run the following code as an emulator you can see that all jump instructions are assembled to the jnb command.
+The machine code of the jnb command is limited to 2 bytes, and the jnb command itself is 73h, which occupies 1 byte.
+Therefore, since there is only one byte left to represent the address, the range of jump is 1 byte.
+If it is 1 byte, considering the sign, it is from -128 ~ 127.
+So it can jump back up to 128 bytes from the it and forward up to 127 bytes.
+
+That is, the jump instructions described in following example are 8-bit jumps, not 16-bit jumps.
+
+
 ```
-jnc a  
+   jnc a  
    jnb a  
    jae a
 
-mov ax, 4  
-   a: mov ax, 5  
+   mov ax, 4  
+a: mov ax, 5  
    ret
 ```
+
 만약 프로그램이 너무 길어져서 128바이트 범위를 벗어난 지점으로 점프하고 싶으면 어떻게 해야될까요? 이 예제를 실행해서 에물레이터에 어떻게 어셈블되었는지 확인해보면 알 수 있습니다. 현대 프로그래밍 환경에서는 전혀 필요없는 내용이므로 따로 설명하지는 않겠습니다. 궁금하면 한번 돌려보세요. 참고로 ARM같은 최신 프로세서도 RISC라는 특성때문에 점프할 수 있는 범위가 작습니다. 그래서 다양한 해결 방법들이 있습니다만 컴파일러가 알아서 해주는 것이지요. 운영체제나 드라이버를 개발해야할때만 그런 특성을 고려하게됩니다.
+
+
 ```
 jz a  
 jb a  
