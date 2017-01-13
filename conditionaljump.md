@@ -27,11 +27,11 @@ So "if 0" is the same to "equal".
 | instruction | desciption | condition | opposite |
 | :--- | :--- | :--- | :--- |
 |jz, je|	if 0 or equal 0일때(같을때) 점프	|zf=1|	jnz,jne
-|jc, jb, jnae|      if carry, less, not above and equal 각각 캐리가 생겼을때, 작을때, 크거나 같지 않을때 점프 | cf=1   | jnc, jnb, jae  |
+|jc, jb, jnae|      if carry, less, not above or equal 각각 캐리가 생겼을때, 작을때, 크거나 같지 않을때 점프 | cf=1   | jnc, jnb, jae  |
 |js           |  sign bit turned on after calculation 계산 결과 부호 비트가 켜졌을 때 점프  |  sf=1 |   jns  |
 |jo |   jump if overflow bit sets 오버플로우가 발생했을 때 점프   | of=1   | jno | 
 |jpe, jp|    jump if Parity Even 상태가 되었을 때 점프  |  pf=1  |  jpo  |
-|jnz, jne|   if not 0 or not equal 0이 아니거나 같지 않을 때 점프  |  zf=0  |  jz, je | 
+|jnz, jne|   if not 0 or equal 0이 아니거나 같지 않을 때 점프  |  zf=0  |  jz, je | 
 |jnc, jnb, jae|   no carry, not below, above or equal 캐리가 없을때, 작지 않을때, 크거나 같을 때 점프  |  cf=0 |   jc, jb, jnae  |
 |jns|    if sign bit is 0 부호 비트가 0일 때 점프  |  sf=0  |  js | 
 |jno|    if overflow bit is 0오버플로우가 아닐 때 점프  |  of=0  |  jo  |
@@ -77,6 +77,11 @@ a: mov ax, 5
 
 만약 프로그램이 너무 길어져서 128바이트 범위를 벗어난 지점으로 점프하고 싶으면 어떻게 해야될까요? 이 예제를 실행해서 에물레이터에 어떻게 어셈블되었는지 확인해보면 알 수 있습니다. 현대 프로그래밍 환경에서는 전혀 필요없는 내용이므로 따로 설명하지는 않겠습니다. 궁금하면 한번 돌려보세요. 참고로 ARM같은 최신 프로세서도 RISC라는 특성때문에 점프할 수 있는 범위가 작습니다. 그래서 다양한 해결 방법들이 있습니다만 컴파일러가 알아서 해주는 것이지요. 운영체제나 드라이버를 개발해야할때만 그런 특성을 고려하게됩니다.
 
+What if the program is too big to jump with 128bit range?
+Run following example and see how it is assembled in the emulator.
+In modern programming language, this is not necessary at all, so I will not explain it in detail.
+
+Note that modern processors like ARM also have a small range of jumps because of the nature of RISC. So there are various solutions, but the compiler does it. Only when you need to develop operating systems or drivers, you need to care such characteristics.
 
 ```
 jz a  
@@ -87,13 +92,20 @@ a:
 ret
 ```
 
-##부호있는 숫자를 비교해서 점프하기
+## jump according to compararation of signed numbers 부호있는 숫자를 비교해서 점프하기
 
 1바이트의 숫자를 비교할 때 255와 10중에 어느게 더 큰가는 부호를 따지느냐 아니냐에 따라 다릅니다. 부호를 고려한다면 255는 -1이고 10은 10이므로 10이 더 큰 것이고 부호를 뺀다면 255가 더 크게 됩니다. 따라서 점프 명령도 빼기를 하므로 부호가 있냐 없냐가 중요하게 됩니다.
 
 부호있는 숫자들을 비교해서 점프하는 명령어는 다음 테이블에 있습니다.
 
-|명령어  |  설명   | 조건  |  반대 명령어  |
+When we compare 1byte number, which is bigger 0ffh or 10h? It depends whether we compare signed numbers or unsigned numbers.
+If we compare signed numbers, 0ffh is -1 and 10h is 16 in decimal, so 10h is bigger.
+If not, 0ffh is bigger because it is 255.
+Therefore jump instructions are separated for signed comparing and unsigned comparing. 
+
+Following is a list of jump instructions for signed comparing.
+
+| instruction  |  description   | condition  |  oppsite  |
 | :--- | :---   | :---  | :--- |
 |JE , JZ |   Jump if Equal \(=\). Jump if Zero.  |  ZF = 1   | JNE, JNZ  |
 |JNE , JNZ |   Jump if Not Equal \(&lt;&gt;\). Jump if Not Zero.  |  ZF = 0  |  JE, JZ  |
@@ -104,9 +116,12 @@ ret
 
 &lt;&gt;는 같지 않다는 표시입니다. 별로 설명하게 없습니다. 크냐 작냐 뿐이니까요. 참고로 크지 않다는 작거나 같다는 것이고 작지 않다는 크거나 같다는 것입니다. &gt; 의 반대는 &lt;= 이라는거 당연하지만 가끔 =을 빼먹으면 골치아픈 버그가 생깁니다.
 
-##부호없는 숫자를 비교해서 점프하기
+``<>`` means "not equal". "Not greater or equal" means "less" and "Not less or equal" means "greater".
+You should notice that opposite of ``<`` is ``>=``, not ``>``.
 
-|명령어  |  설명   | 조건  |  반대 명령어  |
+## jump according to comparation of unsigned numbers 부호없는 숫자를 비교해서 점프하기
+
+| instruction  |  description   | condition  |  oppsite  |
 | :--- | :---   | :---  | :--- |
 |JE , JZ    |Jump if Equal \(=\). Jump if Zero.  |  ZF = 1  |  JNE, JNZ  |
 |JNE , JNZ   | Jump if Not Equal \(&lt;&gt;\). Jump if Not Zero.  |  ZF = 0  |  JE, JZ  |
@@ -115,5 +130,5 @@ ret
 |JAE , JNB, JNC  |  Jump if Above or Equal \(&gt;=\). Jump if Not Below \(not &lt;\). Jump if Not Carry.   | CF = 0  |  JNAE, JB  |
 |JBE , JNA  |  Jump if Below or Equal \(&lt;=\). Jump if Not Above \(not &gt;\).  |  CF = 1 or ZF = 1  |  JNBE, JA|
 
-이정도로 점프 명령어는 마무리하겠습니다.
+You can understand without more explanation.
 
