@@ -61,14 +61,32 @@ m1이라는 함수를 만듭니다. call m1 명령이 함수를 호출하는 명
 주석에는 운영체제로 복귀한다고 써있는데 무슨 뜻이냐면 운영체제가 이 프로그램을 함수 호출처럼 호출했다는 뜻입니다. 운영체제에서 call 명령으로 프로그램을 실행한다는 것입니다. 우리 프로그램의 이름을 어떻게할고 함수처럼 호출했을까요? 또 또 이름이 주소라는 설명을 해야됩니다. 이제 좀 지겹네요. m1이라는 함수 이름도 mov bx, 5 라는 명령이 있는 메모리 주소로 변환됩니다. 우리 프로그램에서는 아마 107h일 것입니다. 그럼 운영체제가 우리 프로그램의 이름을 알 필요가 없다는걸 알 수 있습니다. 대신 call 700h:100h 명령을 실행하면 우리 프로그램이 실행됩니다. 심심하신 분은 예제 프로그램에서 call m1을 call 700h:100h로 바꿔보세요. 무한히 프로그램이 실행되는 것을 볼 수 있습니다. 700h는 cs의 값이고 100h의 ip의 값을 지정하는 것입니다. cs, ip 레지스터의 값은 직접 바꿀 수 없다고 설명했었습니다. 대신에 call 명령으로 바꿀 수 있고 바로 프로세서가 실행해야할 위치를 지정하는 것입니다. 실행 위치또한 메모리의 주소입니다.
 
 마지막은 ret 명령으로 운영체제로 복귀하는 것입니다. 운영체제가 하던 일을 계속하는 것입니다. 요즘 운영체제라면 다른 프로그램을 실행할 것이고 도스같은 운영체제라면 아무것도 안하고 사용자가 다른 프로그램을 실행시키길 기다릴 것입니다. 그건 운영체제가 알아서 할 일이니까 우리가 할 일은 우리 프로그램이 끝났다는 표시만 하면 되는 것입니다.
+
+Above example creates a function: m1.
+The m1 function is called with ``call m1`` command.
+The m1 function stores 5 in bx register and returns.
+The ret instruction returns to a instruction next of call, so ``mov ax, 2`` command is called.
+And then ret is called and the program is terminated.
+The comment of ret instruction says that it returns to OS by ret instruction.
+That is because OS execute the program.
+
+I commented that we cannot change cs and ip registers.
+But there is a exception. The call instruction can change cs and ip registers.
+
+Try to replace ``call m1`` with ``call 700h:100h``.
+700h is for cs and 100h is for ip.
+What happens?
+Try other values and check where it jumps.
+
  
-##레지스터로 함수 인자 전달하기
+## function arguments 레지스터로 함수 인자 전달하기
 
 함수에서 빠지면 안되는게 함수 인자입니다. 인자가 없다면 함수가 별로 필요없겠지요.
 
 그런데 함수 인자를 전달하는 방법은 매우 다양합니다. 레지스터에 저장해서 전달하는 방법이 가장 간단합니다. 그런데 인자가 5개면 어떻게 해야할까요? si나 di 레지스터를 써야할까요? 또 함수 호출 전에 각 레지스터에 있던 값들은 어떻게 해야할까요? 인자가 4개라면 ax, bx, cx, dx 레지스터를 모두 써야되는데 기존에 있던 값들이 지워지지 않게 해야되는데 어떻게 해야할까요? 이런 사항들을 고려해서 함수 호출에 대한 규칙을 정한게 Calling convention 호출 규약이라는 것입니다. 언어마다 운영체제마다 다른 호출 규약을 씁니다. 
 
 지금은 간단하게 레지스터에 인자를 저장하고 함수를 호출하겠습니다. 다음 예제는 al, bl 레지스터에 값을 저장하고 함수를 호출하면 함수는 곱셈을 하고 결과 값을 ax 레지스터에 저장해주는 예제입니다.
+
 
  
 ```
