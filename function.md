@@ -87,8 +87,25 @@ Try other values and check where it jumps.
 
 지금은 간단하게 레지스터에 인자를 저장하고 함수를 호출하겠습니다. 다음 예제는 al, bl 레지스터에 값을 저장하고 함수를 호출하면 함수는 곱셈을 하고 결과 값을 ax 레지스터에 저장해주는 예제입니다.
 
+The call instruction does just jump to function code.
+There is no instruction to pass arguments.
 
+How can we pass arguments?
+There could be many ways.
+I think storing arguments in registers is the easiest way.
+We can store arguments in registers ax, bx, cx, dx.
+But what if the function has 5 arguments? what if 6 arguments?
+
+And there is more critical problem.
+Before we store arguments in registers, there should be valid data in registers.
+How can we save the data in registers?
+
+Therefore there should be a standard to pass arguments that is called as Calling Convention.
+There are various calling conventions for each language, compiler, processor architecture and so on.
+You can find so many calling conventions here: https://en.wikipedia.org/wiki/Calling_convention
  
+Below example shows how to pass arguments in al and bl registers.
+
 ```
 ORG    100h
  
@@ -110,14 +127,14 @@ m2     ENDP
 END
 ``` 
 
-bl 레지스터의 값은 바뀌지 않겠지요. al 레지스터의 값은 2의 제곱, 세제곱, 네제곱이 되서 ax 레지스터에는 2^4의 값이 저장됩니다.
- 
-##쬐끔 고급 예제
-
-
+## advanced example 쬐끔 고급 예제
 
 그냥 눈으로만 보셔도 좋은 예제입니다. 화면에 Hello World! 라는 메세지를 출력하는 프로그램입니다. lea, call, cmp, byte ptr, jmp 명령어를 쓰고 함수도 만들고 함수 인자로 si를 사용하고 있는 종합선물세트입니다. int 10h 명령어만 대강 화면에 al 레지스터에 있는 문자를 출력한다고만 생각하시고 읽어보시기 바랍니다.
 
+Following example is a little bit complicated example to print "Hello World!" on screen.
+It uses lea, call, cmp, jmp instructions and "byte ptr" directive.
+``int 10h`` command is just printing a character in al register.
+Take your time and read code carefully.
  
 ```
 ORG    100h
