@@ -1,21 +1,20 @@
 
-#함수 만들기
+# function
 
 함수를 어떻게 만드는지 설명하겠습니다. 어셈블리 언어에서는 함수를 프로시저라고 부릅니다. 파스칼같은 옛날 언어들은 함수를 프로시저라고 부르던데 사실 무슨 차이인지는 모르겠습니다. 어셈블리에서는 proc 이라는 키워드를 사용하므로 프로시저라고 말하는게 더 맞는 것이긴 하지만 요즘 시대에 맞지 않으므로 저는 함수라고 부르겠습니다.
 
-##함수 만들기
+Let's make a function.
 
-함수는 이렇게 만듭니다.
-
+Following is a template to define a function.
  
 ```
-함수이름 PROC
+<function-name> PROC
 
-; 함수 내용
+; function body
 
 ret
 
-함수이름 ENDP
+<function-name> ENDP
 ```
  
 
@@ -27,7 +26,20 @@ ret 명령이 나왔는데 지금까지 역할이 뭔지 모르고 있었지만 
 
 함수를 호출하는 명령은 call 입니다. 예제를 한번 보시겠습니다.
 
- 
+PROC and ENDP is keyword for assembler that is not instruction.
+They just indicate assembler a starting point and a last point of the function.
+The name of function is specified twice at PROC and ENDP. We can use normal alphabet and under-tar(_) for the name.
+
+The ret is instruction that is already used many times before but not described yet.
+Now let me describe what it does.
+It should be used at the end of a function.
+It make the CPU return where the function is called.
+
+The instruction to call function is call.
+So ret instruction returns the processor to the next instruction of call instruction.
+
+Let's try an example.
+
 ```
 ORG    100h
  
