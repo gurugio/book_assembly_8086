@@ -1,12 +1,23 @@
-#함수 호출 규약과 지역변수
+# Calling function via stack and local variables 함수 호출 규약과 지역변수
 
 이전에는 함수 호출을 위한 call,ret 명령에 대해서만 알아보기위해 개략적인 내용만 설명했습니다. 이제는 함수가 어떻게 호출되는지 제대로 알아보겠습니다. 함수를 호출할 때는 스택을 활용합니다. 스택이 어떻게 사용되는지를 설명하겠습니다.
 
-##함수 호출
+Last chapter described two instructions, call and ret, to just call a function.
+Now let's dig in the function in detail.
+
+## call a function with arguments in stack
 
 함수를 배울 때 실습했던 예제가 있었습니다. 레지스터에 함수 인자를 저장하고 함수를 호출해서 함수내에서 곱셈을 실행하고 결과값을 ax 레지스터로 반환하는 예제입니다. 이 예제를 다음처럼 스택을 이용해서 인자를 전달하도록 바꿔보겠습니다. 사실은 이 예제처럼 스택에 인자를 저장하고 함수 내부에서는 스택 메모리에 접근해서 인자를 읽는 방식이 C의 표준적인 함수 호출 규약중 하나입니다. 이 규약을 잘 지키면 어셈블리 코드에서 libc의 라이브러리 함수를 호출하는 것도 가능합니다.
 
 일단 에물레이터로 실행해보시기 바랍니다.
+
+In last chapter, we tried a simple example to just call a function that get arguments from reigsters and does multiplication, and then return the result in ax.
+
+Let's improve that function. We will pass arguments via stack.
+This is a mimic version of calling convention of C language on x86 architecture that specifies what argument is passed which register and stack, and how to return a result.
+Following example shows the basic principle of that convention.
+So following example helps you to understand the standard calling convention.
+
 ```
 ORG    100h
 
@@ -44,6 +55,28 @@ END
 에물레이터에서 stack 버튼을 눌러서 스택의 상황을 보고 계신가요? 그럼 call 명령이 호출된 후에 스택에 내가 저장하지 않은 이상한 값이 들어간 것을 볼 수 있습니다. 스택 메모리 0fffch에 1이 저장되고 0fffah에 2가 저장되고 그리고 0fff8h에 10bh 값이 저장되었을 것입니다. 10bh값이 뭔지는 잠시 후에 말씀드리기로 하고 지금은 함수 인자가 스택에 있다는 것만 기억하시기 바랍니다.
 
 이제 함수에서 함수 인자를 읽어야 합니다. 그런데 pop 명령을 사용하면 스택에 있는 10bh 값이 읽혀집니다. 뭔가 역할이 있는 값일테니 pop 명령을 써서 날려버리면 안되겠지요. 그래서 스택을 건드리지않고 메모리에 있는 값만 읽도록 해야합니다. 이럴 때는 주로 bp 레지스터를 씁니다. bp 레지스터는 그냥 변수 주소를 넣을 때도 쓸 수 있지만 사실은 이렇게 스택에 있는 함수의 인자를 읽기 위해서 스택의 포인터의 복사본을 저장하는데 주로 사용됩니다. [bp]로 메모리의 값을 읽으면 10bh 값이 읽어질거니까 그건 건너뜁니다. 그래서 함수의 인자는 [bp+2] 와 [bp+4]가 됩니다.
+
+It looks a little bit complicated but you can understand it as you run one line by one line with the emulator.
+
+First 1 is stored in dx and dx value is stored in stack. You don't need to only dx but any register. What we want to do is just storing 1 in stack.
+Next is storing 2 in stack.
+Now every argument is stored in stack. It's ready to call m2 function.
+
+Please check the values of stack memory with the emulator.
+There are not only 1 and 2 but also a strange value in stack.
+The first argument 1 is stored in 0fffch and 2 0fffah.
+And 10bh is stored in 0fff8h.
+I will explain what it is soon. 
+Just remember now that arguments are in stack.
+
+Now the function is being executed.
+How can we get the arguments that caller stores in stack?
+Yes, we can use pop instruction.
+But wait. If we call the pop instruction now, we would get a strange value 10bh.
+That is not what we want.
+
+So we need to read stack memory without changing anything.
+
 
 혹시 굳이 bp를 사용하지 않고 [sp+2], [sp+4]로 읽어도 된다고 생각하지 않으시나요? bp를 사용하는 이유는 지역변수를 이야기할 때 말씀드리겠습니다. 무조건 bp를 사용해서 함수 인자를 읽는다고 생각하셔야 합니다.
 
