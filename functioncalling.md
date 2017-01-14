@@ -114,19 +114,30 @@ After the function is finished, there is one more thing to do. It is restoring t
 We stored arguments in stack.
 If we do not restore the stack pointer, it will only grow and go the out of stack memory.
 We stored two arguments, so we add 4 to sp.
-Now sp value is again the initial address of stack.
+Now sp value get back to the initial address of stack.
 
 
 또다시 m2를 호출하겠습니다. 이번에는 이전의 결과값이 ax에 있으므로 ax를 스택에 넣습니다. 그리고 다시 2를 넣습니다. 그리고 m2를 호출하면 ax에는 2*2=4가 저장되겠네요. 마지막으로 다시 스택을 복구시킵니다.
 
 스택은 이렇게 함수 호출에 이용됩니다. 심심하신 분들은 C로 무한 재귀 함수를 만들어보시기 바랍니다. 스택 복구하는 코드가 실행되지 않고 계속 스택을 사용하기만 하므로 스택 영역을 모두 사용해서 세그먼트 폴트가 발생합니다. 스택을 몰랐다면 함수가 무한히 재귀적으로 실행되도 무한히 실행되고 문제가 없을것 같은데 그게 아니라메모리 문제가 발생한다는 것을 알 수 있습니다.
 
+Let's call m2 again.
+The return value of the first m1 function is still stored in ax.
+So the value of ax and 2 are stored in stack.
+The second m2 function will calculate 2*2 and stores 4 in ax register.
 
-##함수의 지역 변수
+We understand when stack is used and where ss, sp and bp registers are used.
+If you want, try to make a infinite resursive function and check the status of stack memory.
+
+## local variable of function 함수의 지역 변수
 
 이제 함수 내부에서 인자에 접근하기 위해 왜 sp가 아닌 bp를 사용하는지 말씀드리겠습니다. 바로 함수의 지역 변수를 스택에 만들기 때문입니다.
 
 다음 예제는 인자로 받은 값을 swap해주는 함수입니다. swap함수는 무조건 지역 변수가 하나 있어야 된다는거 아시지요?
+
+I said bp is used to access argument because local variables changes sp register.
+Following example shows how to make the local variables.
+
 ```
 ORG    100h
 
@@ -171,6 +182,31 @@ swap     ENDP
 swap 함수가 시작됩니다. bp에 스택 주소를 저장합니다. 함수 인자는 변수의 주소입니다. 따라서 [bp+2]는 var2의 주소이고 [bp+4]는 var1의 주소입니다. 각각 읽어서 si와 di에 저장합니다.
 
 그리고 스택에 0을 집어넣습니다. 값이 0인 것은 중요하지 않습니다. 단지 스택에 공간을 하나 만든 것입니다. 그리고 이게바로 함수의 지역 변수입니다. C언어를 아시는 분은 지역 변수의 정의를 생각해보시면 왜 스택에 지역변수를 저정하는지 아실겁니다. 지역 변수는 함수 내부에서만 사용하다가 함수가 끝나면 사라지는 변수입니다. 따로 메모리를 할당하고 해지할 필요가 없는 특징이 있습니다. 바로 스택 메모리의 특징과 같습니다. 스택에 지역 변수를 저장하므로 그런 특징들이 생겨난 것입니다.
+
+There are two variables, var1 and var2 those are 11h and 22h, respectively.
+The swap function does swapping of two variable, so they will be 22h and 11h.
+What should we pass to the swap function? Values of variables or pointers of variables?
+Of course, we should pass pointers.
+
+Let's look into the swap function.
+The sp is copied into bp.
+The arguments are the addresses of variables, so [bp+2] and [bp+4] are the addresses of var2 and var1, respectively.
+Let's store them into si and di.
+
+Then it stores 0 in stack.
+Why?
+Actually the value to be stored does not matter.
+It just makes a memory space for a local variable.
+Have you ever study any low level programming language like C or C++ language?
+If so, you might heard that the local variable is stored in stack.
+Yes, that example shows how the local variable is created in other languages.
+
+The local variable is only used inside of function.
+Therefore we don't need to call memory allocation API, for instance malloc(), to create the local variable.
+If we just declare the local variable, compiler adds some code to make space in stack like above example.
+We don't need to call memory free API, for instance free(), to free the local variable, because stack is restored after function is finished.
+Now you can understand why the local variable has such characteristics.
+That is because it is stored in stack.
 
 sp 의 값은 지역 변수를 만들 때마다 계속 바뀔 것입니다. 따라서 함수가 호출된 직후에 초기 sp의 값을 저장해놓았다가 함수가 끝났을 때 복구해야합니다. 그래야 ret 명령으로 복귀 주소를 읽을 수가 있습니다. 그래서 초기 sp의 값을 bp에 저장해놓는 것입니다. 그리고 bp는 항상 일정한 값이므로 bp를 기준으로 +를 하면 함수 인자를 읽게되고 -를 하면 지역 변수를 읽을 수 있습니다. [bp]를 그대로 읽으면 복귀 주소가 되겠지요. 결국 [bp-2]가 지역 변수가 됩니다.
 
