@@ -110,11 +110,17 @@ The call stores the address of the next command in stack and the ret pop the add
 
 그리고 함수가 끝나고 해야할 일은 스택에 있던 인자들을 지워주는 것입니다. 인자들을 지우지 않으면 함수를 호출 할 때마다 스택이 점점 작아지겠지요. pop 을 두번해서 스택을 되돌리는 방법도 있고 예제처럼 sp 레지스터에 4를 더해서 sp의 값을 예전 값으로 되돌리는 방법도 있습니다. 이왕이면 2개보다는 1개 명령이 실행되는게 좋겠지요.
 
+After the function is finished, there is one more thing to do. It is restoring the stack pointer.
+We stored arguments in stack.
+If we do not restore the stack pointer, it will only grow and go the out of stack memory.
+We stored two arguments, so we add 4 to sp.
+Now sp value is again the initial address of stack.
+
+
 또다시 m2를 호출하겠습니다. 이번에는 이전의 결과값이 ax에 있으므로 ax를 스택에 넣습니다. 그리고 다시 2를 넣습니다. 그리고 m2를 호출하면 ax에는 2*2=4가 저장되겠네요. 마지막으로 다시 스택을 복구시킵니다.
 
 스택은 이렇게 함수 호출에 이용됩니다. 심심하신 분들은 C로 무한 재귀 함수를 만들어보시기 바랍니다. 스택 복구하는 코드가 실행되지 않고 계속 스택을 사용하기만 하므로 스택 영역을 모두 사용해서 세그먼트 폴트가 발생합니다. 스택을 몰랐다면 함수가 무한히 재귀적으로 실행되도 무한히 실행되고 문제가 없을것 같은데 그게 아니라메모리 문제가 발생한다는 것을 알 수 있습니다.
 
- 
 
 ##함수의 지역 변수
 
