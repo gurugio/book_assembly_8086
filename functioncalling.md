@@ -210,6 +210,16 @@ That is because it is stored in stack.
 
 sp 의 값은 지역 변수를 만들 때마다 계속 바뀔 것입니다. 따라서 함수가 호출된 직후에 초기 sp의 값을 저장해놓았다가 함수가 끝났을 때 복구해야합니다. 그래야 ret 명령으로 복귀 주소를 읽을 수가 있습니다. 그래서 초기 sp의 값을 bp에 저장해놓는 것입니다. 그리고 bp는 항상 일정한 값이므로 bp를 기준으로 +를 하면 함수 인자를 읽게되고 -를 하면 지역 변수를 읽을 수 있습니다. [bp]를 그대로 읽으면 복귀 주소가 되겠지요. 결국 [bp-2]가 지역 변수가 됩니다.
 
+The value of sp is changed whenever a local variable is created.
+So sp should be copied into bp before a local variable is created.
+And restoring sp should be done at the last point of the function.
+At the last point of the function, stack should have only the return address for ret instruction to read the return address.
+That is why ``mov bp, sp`` is the first command of the function and ``mov sp, bp`` is the last.
+
+The value of bp is fixed during the function, so function arguments and local variables are accessible via bp register.
+[bp+X] is for argument and [bp-X] is for local variable.
+And [bp] is for return address.
+
 si에서 워드값을 읽으면 var1 변수의 값입니다. di에서 읽으면 var2의 값입니다. 그리고 지역 변수 [bp-2]에 var1 값을 저장합니다. 여기까지가 temp = a 동작입니다. C로 한줄이면 되는게 몇줄이 되버립니다.
 
 si에는 var1의 주소가 있으므로 mov word ptr [si], bx 명령으로 var1의 값을 바꿉니다. 그리고 dx에 지역 변수에 저장했던 var1의 값을 읽어와서 [di]에 저장합니다. 그러면 var2의 값이 바뀌는 것입니다.
@@ -218,7 +228,9 @@ si에는 var1의 주소가 있으므로 mov word ptr [si], bx 명령으로 var1�
 
 좀 복잡하지만 뭔가 생각나는게 많으시리라 믿습니다. C 언어의 포인터가 뭔지 간접 레퍼런스니 하는 개념들이 뭔지 등등 C의 주요 개념들을 다시한번 되새겨보시는 기회가 되었으면 합니다.
 
- 
+
+
+
 
 ##레지스터 복구
 
