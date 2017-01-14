@@ -103,8 +103,9 @@ How can we save the data in registers?
 Therefore there should be a standard to pass arguments that is called as Calling Convention.
 There are various calling conventions for each language, compiler, processor architecture and so on.
 You can find so many calling conventions here: https://en.wikipedia.org/wiki/Calling_convention
+We will try one of the standard calling conventions next chapter.
  
-Below example shows how to pass arguments in al and bl registers.
+Below example shows a non-standard calling convention that passes arguments in al and bl registers.
 
 ```
 ORG    100h
