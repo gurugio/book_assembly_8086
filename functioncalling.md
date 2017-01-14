@@ -74,8 +74,16 @@ How can we get the arguments that caller stores in stack?
 Yes, we can use pop instruction.
 But wait. If we call the pop instruction now, we would get a strange value 10bh.
 That is not what we want.
+We don't know what 10bh is but it must be used somewhere, so we must keep it in stack.
 
 So we need to read stack memory without changing anything.
+The register that we can use to access stack memory is bp register.
+The bp register has usually copy of sp register and is used to access function arguments.
+
+At the beginning of m2 function, ``mov bp, sp`` command copies sp into bp.
+And [bp+2] is always the last argument and [bp+4] is the second one.
+Function itself knows how many argument it has.
+So function can access its arguments with [bp+2], [bp+4], ... [bp+(2*#argument-number)].
 
 
 혹시 굳이 bp를 사용하지 않고 [sp+2], [sp+4]로 읽어도 된다고 생각하지 않으시나요? bp를 사용하는 이유는 지역변수를 이야기할 때 말씀드리겠습니다. 무조건 bp를 사용해서 함수 인자를 읽는다고 생각하셔야 합니다.
@@ -83,6 +91,22 @@ So we need to read stack memory without changing anything.
 함수의 첫번째 인자는 [bp+4]이고 두번째 인자는 [bp+2]입니다. 처음 스택에 넣은 데이터가 좀더 큰 주소에 있습니다. 두개의 인자를 적당히 읽어서 함수가 해야하는 처리를 합니다. 예제에서는 곱셈입니다. 그리고 곱셈의 결과가 ax에 저장됩니다.
 
 이제 함수가 끝납니다. ret 명령이 함수의 끝에 반드시 있어야 된다고 말씀드렸고 ret 명령이 실행되면 call 명령의 다음 명령으로 점프한다고 말씀드렸습니다. 에물레이터에서 ret 명령을 single step으로 실행하고 sp 레지스터의 값을 확인해보겠습니다. 0fff8h였던 sp의 값이 0fffah가 되었습니다. 즉 ret 명령은 스택에서 10bh 값을 꺼내는 일을 합니다. 그리고 ip 값을 보시면 10bh 가 되어있습니다. 10bh는 어디인가요? call m2 다음 명령인 add sp, 4 명령이 있는 위치입니다. 즉 call 명령은 자기 다음의 명령의 주소를 스택에 저장하고 ret 명령은 스택에서 복귀 주소를 꺼내서 실행하는 것입니다. 이렇게 call 명령과 ret 명령이 함수를 호출하고 복귀하는 것입니다. 별로 어렵지 않은 것을 좀 어렵게 설명한 기분이지만 기분탓입니다.
+
+Yes, somebody might think we can use [sp+2] and [sp+4] instead.
+When function creates the local variable, sp will be changed and [sp+2] also will be changed.
+So bp register is always used to access arguments.
+
+Now function is terminated by ret instruction.
+As I said, the last command of the function should be ret instruction.
+The ret instruction returns back to caller as the name is.
+Let's run the ret instruction with single step button and check sp register.
+The sp register was 0fff8h before but now 0ffah.
+The ret instruction pop two bytes value 10bh.
+And please check the ip register.
+Its value is 10bh.
+The next command of ``call m2`` is ``add sp, 4`` and its address is 10bh.
+Yes, now we understand one more thing about call and ret.
+The call stores the address of the next command in stack and the ret pop the address and jump.
 
 그리고 함수가 끝나고 해야할 일은 스택에 있던 인자들을 지워주는 것입니다. 인자들을 지우지 않으면 함수를 호출 할 때마다 스택이 점점 작아지겠지요. pop 을 두번해서 스택을 되돌리는 방법도 있고 예제처럼 sp 레지스터에 4를 더해서 sp의 값을 예전 값으로 되돌리는 방법도 있습니다. 이왕이면 2개보다는 1개 명령이 실행되는게 좋겠지요.
 
