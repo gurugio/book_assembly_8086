@@ -1,7 +1,5 @@
 # emu8086.inc
 
-emu8086 프로그램이 자체적으로 제공하는 라이브러리가 있습니다. emu8086.inc 입니다. include "emu8086.inc"라는 키워드만 사용하면 라이브러리를 사용할 수 있습니다.
-
 emu8086 provides some libraries that have macro functions for IO, mathmatic operaion and so on.
 emu8086.inc is the most common file.
 You can use the library if you write ``include "emu8086.inc`` at the first line of source file.
