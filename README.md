@@ -1,6 +1,6 @@
-# In the beginning was the Assembly
+# In the beginning, there was the Assembly
 
-Note. This document was written in Korean and now is on translating into English. Many of you must already realize that my mother language is not English. Please give me feedback if you find any stupid expression. You can send me via DISCUSSION menu in gitbook site and Issue menu in github site.
+Note. Many of you must already realize that my mother language is not English. Please give me feedback if you find any stupid expression. You can send me via DISCUSSION menu in gitbook site and Issue menu in github site.
 
 
 In the Beginning of the computer world, there is a Word. It's the Assembly language.  
