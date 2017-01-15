@@ -1,4 +1,4 @@
-# 어셈블리를 하는 이유 Why we need 8086 assembly?
+# Why we need 8086 assembly?
 
 As far as I remember NASA announced they decided not to use 8086 CPU any more several years ago.  
 Currently even NASA, they always use the oldest but the stablest chip, does not use 8086.  
