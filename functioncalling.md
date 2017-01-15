@@ -175,13 +175,6 @@ mov sp, bp
 RET                   ; return to caller.
 swap     ENDP
 ```
- 
-
-두개의 변수 var1, var2를 만듭니다. 각각 11h, 22h 값이 들어있습니다. 이제 swap을 호출해서 22h, 11h로 값을 바꾸겠습니다. 값을 바꾸려면 swap 함수에 변수의 값을 넘겨야할까요 아니면 변수의 주소를 넘겨야 할까요? 당연히 주소를 넘겨야합니다. C 언어를 모르셔서 주소를 넘기는 이유를 모르시는 분들은 그냥 그렇다고만 생각하셔도 좋습니다.
-
-swap 함수가 시작됩니다. bp에 스택 주소를 저장합니다. 함수 인자는 변수의 주소입니다. 따라서 [bp+2]는 var2의 주소이고 [bp+4]는 var1의 주소입니다. 각각 읽어서 si와 di에 저장합니다.
-
-그리고 스택에 0을 집어넣습니다. 값이 0인 것은 중요하지 않습니다. 단지 스택에 공간을 하나 만든 것입니다. 그리고 이게바로 함수의 지역 변수입니다. C언어를 아시는 분은 지역 변수의 정의를 생각해보시면 왜 스택에 지역변수를 저정하는지 아실겁니다. 지역 변수는 함수 내부에서만 사용하다가 함수가 끝나면 사라지는 변수입니다. 따로 메모리를 할당하고 해지할 필요가 없는 특징이 있습니다. 바로 스택 메모리의 특징과 같습니다. 스택에 지역 변수를 저장하므로 그런 특징들이 생겨난 것입니다.
 
 There are two variables, var1 and var2 those are 11h and 22h, respectively.
 The swap function does swapping of two variable, so they will be 22h and 11h.
@@ -208,8 +201,6 @@ We don't need to call memory free API, for instance free(), to free the local va
 Now you can understand why the local variable has such characteristics.
 That is because it is stored in stack.
 
-sp 의 값은 지역 변수를 만들 때마다 계속 바뀔 것입니다. 따라서 함수가 호출된 직후에 초기 sp의 값을 저장해놓았다가 함수가 끝났을 때 복구해야합니다. 그래야 ret 명령으로 복귀 주소를 읽을 수가 있습니다. 그래서 초기 sp의 값을 bp에 저장해놓는 것입니다. 그리고 bp는 항상 일정한 값이므로 bp를 기준으로 +를 하면 함수 인자를 읽게되고 -를 하면 지역 변수를 읽을 수 있습니다. [bp]를 그대로 읽으면 복귀 주소가 되겠지요. 결국 [bp-2]가 지역 변수가 됩니다.
-
 The value of sp is changed whenever a local variable is created.
 So sp should be copied into bp before a local variable is created.
 And restoring sp should be done at the last point of the function.
@@ -220,21 +211,29 @@ The value of bp is fixed during the function, so function arguments and local va
 [bp+X] is for argument and [bp-X] is for local variable.
 And [bp] is for return address.
 
-si에서 워드값을 읽으면 var1 변수의 값입니다. di에서 읽으면 var2의 값입니다. 그리고 지역 변수 [bp-2]에 var1 값을 저장합니다. 여기까지가 temp = a 동작입니다. C로 한줄이면 되는게 몇줄이 되버립니다.
+The address of var1 variable is in si, so you can read the value of var1 with ``mov ax, word ptr [si]`` command.
+The var2 is referenced with di.
+There is not any name for the local variable. Why?
+Because processor does not need any name, but only address.
+The address of the local variable is accessed by [bp-2].
 
-si에는 var1의 주소가 있으므로 mov word ptr [si], bx 명령으로 var1의 값을 바꿉니다. 그리고 dx에 지역 변수에 저장했던 var1의 값을 읽어와서 [di]에 저장합니다. 그러면 var2의 값이 바뀌는 것입니다.
+While you read above example, you should be carefule what value each register has.
+Sometimes a register has a value, sometimes a register has a address.
+Please check comment that I left at each line.
 
-마지막으로 sp를 bp로 바꾸면 스택이 초기화되고 복귀 주소를 꺼낼 수 있게 됩니다.
+The last command of the function is restoring sp with bp.
+Do you remember? The sp is copied into bp at the beginning of the function.
 
-좀 복잡하지만 뭔가 생각나는게 많으시리라 믿습니다. C 언어의 포인터가 뭔지 간접 레퍼런스니 하는 개념들이 뭔지 등등 C의 주요 개념들을 다시한번 되새겨보시는 기회가 되었으면 합니다.
+I have one more thing to tell.
+If you know C language, you might heard about de-referencing of pointer.
+Above example shows what de-referencing of pointer is.
 
-
-
-
-
-##레지스터 복구
+## restoring registers
 
 swap 프로그램에서 만약에 swap을 2번 호출한다면 어떻게 해야할까요?
+
+What will happend if the swap function is called twice like following example?
+
 ```
 ORG    100h
 
@@ -255,11 +254,13 @@ add sp, 4
 ret
 ```
 이렇게 똑같은 호출을 2번 하면 될까요? 그래도 되긴 합니다. 하지만 ax, bx 레지스터에 값을 설정하는 부분이 중복됩니다. 따라서 중복 부분을 없애면 더 좋겠지요.
+
+It works. But there is duplicated code to setup ax and bx.
+Following example removed the duplicated code.
 ```
 ORG    100h
 
 lea bx, var2 ; push &var2
-
 lea ax, var1 ; push &var1
 
 push ax
@@ -280,32 +281,26 @@ ax, bx를 설정하고 필요할 때마다 함수 호출을 반복하면 더 좋
 
 swap을 다시 만들어보겠습니다. swap에서는 bp, si, di, ax, bx, dx를 사용합니다. 따라서 함수 초기에 이런 레지스터들을 스택에 보존하는 일을 해야합니다.
 
+But above does not work well because ax and bx is changed by the first swap function.
+And if other registers has data, what will happend to the registers after function call?
+
+
 ```
 swap     PROC
 
 mov bp, sp
-
 mov ax, 0 ; temp=[bp-4]
 push ax
-
 push bp
-
 push si
-
 push di
-
 push ax
-
 push bx
-
 push dx
 
 mov si, [bp+2] ;si = &var2
-
 mov di, [bp+4] ;di = &var1
-
 mov ax, word ptr [si] ; ax = var1
-
 mov bx, word ptr [di] ; bx = var2
 mov word ptr [bp-2], ax ; temp = var1
 mov word ptr [si], bx ; *&var1 = var2
@@ -313,21 +308,13 @@ mov dx, word ptr [bp-2] ; dx = temp
 mov word ptr [di], dx ; *&var2=temp
 
 pop dx
-
 pop bx
-
 pop ax
-
 pop di
-
 pop si
-
 pop bp
-
 pop ax
-
 mov sp, bp
-
 RET                   ; return to caller.
 swap     ENDP
 ```
