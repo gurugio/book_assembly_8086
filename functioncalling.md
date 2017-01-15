@@ -1,15 +1,9 @@
-# Calling function via stack and local variables 함수 호출 규약과 지역변수
-
-이전에는 함수 호출을 위한 call,ret 명령에 대해서만 알아보기위해 개략적인 내용만 설명했습니다. 이제는 함수가 어떻게 호출되는지 제대로 알아보겠습니다. 함수를 호출할 때는 스택을 활용합니다. 스택이 어떻게 사용되는지를 설명하겠습니다.
+# Calling function via stack and local variables
 
 Last chapter described two instructions, call and ret, to just call a function.
 Now let's dig in the function in detail.
 
 ## call a function with arguments in stack
-
-함수를 배울 때 실습했던 예제가 있었습니다. 레지스터에 함수 인자를 저장하고 함수를 호출해서 함수내에서 곱셈을 실행하고 결과값을 ax 레지스터로 반환하는 예제입니다. 이 예제를 다음처럼 스택을 이용해서 인자를 전달하도록 바꿔보겠습니다. 사실은 이 예제처럼 스택에 인자를 저장하고 함수 내부에서는 스택 메모리에 접근해서 인자를 읽는 방식이 C의 표준적인 함수 호출 규약중 하나입니다. 이 규약을 잘 지키면 어셈블리 코드에서 libc의 라이브러리 함수를 호출하는 것도 가능합니다.
-
-일단 에물레이터로 실행해보시기 바랍니다.
 
 In last chapter, we tried a simple example to just call a function that get arguments from reigsters and does multiplication, and then return the result in ax.
 
@@ -48,13 +42,6 @@ m2     ENDP
  
 END
 ```
-좀 복잡하지만 에물레이터로 한줄한줄 실행해보면 어렵지 않습니다.
-
-가장 먼저 dx에 1을 저장한 후 스택에 저장합니다. 꼭 dx 레지스터를 사용할 필요는 없습니다. 그냥 스택에 1을 저장하기 위해 아무 레지스터나 사용한 것입니다. 그리고 스택에 2를 저장합니다. 이제 함수에 전달할 인자 1과 2가 스택에 저장되었습니다. 인자를 준비했으니 함수 m2를 호출합니다.
-
-에물레이터에서 stack 버튼을 눌러서 스택의 상황을 보고 계신가요? 그럼 call 명령이 호출된 후에 스택에 내가 저장하지 않은 이상한 값이 들어간 것을 볼 수 있습니다. 스택 메모리 0fffch에 1이 저장되고 0fffah에 2가 저장되고 그리고 0fff8h에 10bh 값이 저장되었을 것입니다. 10bh값이 뭔지는 잠시 후에 말씀드리기로 하고 지금은 함수 인자가 스택에 있다는 것만 기억하시기 바랍니다.
-
-이제 함수에서 함수 인자를 읽어야 합니다. 그런데 pop 명령을 사용하면 스택에 있는 10bh 값이 읽혀집니다. 뭔가 역할이 있는 값일테니 pop 명령을 써서 날려버리면 안되겠지요. 그래서 스택을 건드리지않고 메모리에 있는 값만 읽도록 해야합니다. 이럴 때는 주로 bp 레지스터를 씁니다. bp 레지스터는 그냥 변수 주소를 넣을 때도 쓸 수 있지만 사실은 이렇게 스택에 있는 함수의 인자를 읽기 위해서 스택의 포인터의 복사본을 저장하는데 주로 사용됩니다. [bp]로 메모리의 값을 읽으면 10bh 값이 읽어질거니까 그건 건너뜁니다. 그래서 함수의 인자는 [bp+2] 와 [bp+4]가 됩니다.
 
 It looks a little bit complicated but you can understand it as you run one line by one line with the emulator.
 
@@ -85,13 +72,6 @@ And [bp+2] is always the last argument and [bp+4] is the second one.
 Function itself knows how many argument it has.
 So function can access its arguments with [bp+2], [bp+4], ... [bp+(2*#argument-number)].
 
-
-혹시 굳이 bp를 사용하지 않고 [sp+2], [sp+4]로 읽어도 된다고 생각하지 않으시나요? bp를 사용하는 이유는 지역변수를 이야기할 때 말씀드리겠습니다. 무조건 bp를 사용해서 함수 인자를 읽는다고 생각하셔야 합니다.
-
-함수의 첫번째 인자는 [bp+4]이고 두번째 인자는 [bp+2]입니다. 처음 스택에 넣은 데이터가 좀더 큰 주소에 있습니다. 두개의 인자를 적당히 읽어서 함수가 해야하는 처리를 합니다. 예제에서는 곱셈입니다. 그리고 곱셈의 결과가 ax에 저장됩니다.
-
-이제 함수가 끝납니다. ret 명령이 함수의 끝에 반드시 있어야 된다고 말씀드렸고 ret 명령이 실행되면 call 명령의 다음 명령으로 점프한다고 말씀드렸습니다. 에물레이터에서 ret 명령을 single step으로 실행하고 sp 레지스터의 값을 확인해보겠습니다. 0fff8h였던 sp의 값이 0fffah가 되었습니다. 즉 ret 명령은 스택에서 10bh 값을 꺼내는 일을 합니다. 그리고 ip 값을 보시면 10bh 가 되어있습니다. 10bh는 어디인가요? call m2 다음 명령인 add sp, 4 명령이 있는 위치입니다. 즉 call 명령은 자기 다음의 명령의 주소를 스택에 저장하고 ret 명령은 스택에서 복귀 주소를 꺼내서 실행하는 것입니다. 이렇게 call 명령과 ret 명령이 함수를 호출하고 복귀하는 것입니다. 별로 어렵지 않은 것을 좀 어렵게 설명한 기분이지만 기분탓입니다.
-
 Yes, somebody might think we can use [sp+2] and [sp+4] instead.
 When function creates the local variable, sp will be changed and [sp+2] also will be changed.
 So bp register is always used to access arguments.
@@ -108,18 +88,11 @@ The next command of ``call m2`` is ``add sp, 4`` and its address is 10bh.
 Yes, now we understand one more thing about call and ret.
 The call stores the address of the next command in stack and the ret pop the address and jump.
 
-그리고 함수가 끝나고 해야할 일은 스택에 있던 인자들을 지워주는 것입니다. 인자들을 지우지 않으면 함수를 호출 할 때마다 스택이 점점 작아지겠지요. pop 을 두번해서 스택을 되돌리는 방법도 있고 예제처럼 sp 레지스터에 4를 더해서 sp의 값을 예전 값으로 되돌리는 방법도 있습니다. 이왕이면 2개보다는 1개 명령이 실행되는게 좋겠지요.
-
 After the function is finished, there is one more thing to do. It is restoring the stack pointer.
 We stored arguments in stack.
 If we do not restore the stack pointer, it will only grow and go the out of stack memory.
 We stored two arguments, so we add 4 to sp.
 Now sp value get back to the initial address of stack.
-
-
-또다시 m2를 호출하겠습니다. 이번에는 이전의 결과값이 ax에 있으므로 ax를 스택에 넣습니다. 그리고 다시 2를 넣습니다. 그리고 m2를 호출하면 ax에는 2*2=4가 저장되겠네요. 마지막으로 다시 스택을 복구시킵니다.
-
-스택은 이렇게 함수 호출에 이용됩니다. 심심하신 분들은 C로 무한 재귀 함수를 만들어보시기 바랍니다. 스택 복구하는 코드가 실행되지 않고 계속 스택을 사용하기만 하므로 스택 영역을 모두 사용해서 세그먼트 폴트가 발생합니다. 스택을 몰랐다면 함수가 무한히 재귀적으로 실행되도 무한히 실행되고 문제가 없을것 같은데 그게 아니라메모리 문제가 발생한다는 것을 알 수 있습니다.
 
 Let's call m2 again.
 The return value of the first m1 function is still stored in ax.
@@ -129,11 +102,7 @@ The second m2 function will calculate 2*2 and stores 4 in ax register.
 We understand when stack is used and where ss, sp and bp registers are used.
 If you want, try to make a infinite resursive function and check the status of stack memory.
 
-## local variable of function 함수의 지역 변수
-
-이제 함수 내부에서 인자에 접근하기 위해 왜 sp가 아닌 bp를 사용하는지 말씀드리겠습니다. 바로 함수의 지역 변수를 스택에 만들기 때문입니다.
-
-다음 예제는 인자로 받은 값을 swap해주는 함수입니다. swap함수는 무조건 지역 변수가 하나 있어야 된다는거 아시지요?
+## local variable of function
 
 I said bp is used to access argument because local variables changes sp register.
 Following example shows how to make the local variables.
@@ -230,8 +199,6 @@ Above example shows what de-referencing of pointer is.
 
 ## restoring registers
 
-swap 프로그램에서 만약에 swap을 2번 호출한다면 어떻게 해야할까요?
-
 What will happend if the swap function is called twice like following example?
 
 ```
@@ -253,7 +220,6 @@ add sp, 4
 
 ret
 ```
-이렇게 똑같은 호출을 2번 하면 될까요? 그래도 되긴 합니다. 하지만 ax, bx 레지스터에 값을 설정하는 부분이 중복됩니다. 따라서 중복 부분을 없애면 더 좋겠지요.
 
 It works. But there is duplicated code to setup ax and bx.
 Following example removed the duplicated code.
@@ -275,15 +241,18 @@ add sp, 4
 
 ret
 ```
-ax, bx를 설정하고 필요할 때마다 함수 호출을 반복하면 더 좋을것 같습니다. 그런데 막상 실행해보면 안됩니다. 왜냐면 첫번째 swap이 ax, bx 의 값이 바꾸기 때문입니다. 함수들은 항상 레지스터를 쓰기 마련인데 그렇게 되면 함수 호출 이전에 있는 레지스터의 값들이 날아가 버립니다. 따라서 라이브러리 함수일 경우 호출된 다음에 레지스터가 어떻게 바뀌었는지 모르게 될 수도 있고, 내가 만든 함수라도 일일이 함수 호출 전에 레지스터의 값들을 스택에 넣어줘야하는 불편도 있습니다. 
-
-그래서 이런 불편을 없애기 위해 모든 함수는 자기가 사용할 레지스터들을 스택에 보존했다가 함수 종료 직전에 복구하는 규칙이 있습니다.
-
-swap을 다시 만들어보겠습니다. swap에서는 bp, si, di, ax, bx, dx를 사용합니다. 따라서 함수 초기에 이런 레지스터들을 스택에 보존하는 일을 해야합니다.
 
 But above does not work well because ax and bx is changed by the first swap function.
-And if other registers has data, what will happend to the registers after function call?
+what will happend to the registers if other registers also has data?
+The data can be changed by the function.
 
+We know what registers swap function uses.
+But we don't know what registers other APIs or library functions use.
+Therefore each function should save register values it will change.
+Let's make swap function again.
+Following swap function save register values it will use at the beginning.
+At the end it will restore the saved values such like sp register.
+So after function finishes, everything is the same before the function call.
 
 ```
 swap     PROC
@@ -318,7 +287,3 @@ mov sp, bp
 RET                   ; return to caller.
 swap     ENDP
 ```
-
-이렇게 각 함수들이 자기들이 사용할 레지스터의 값들을 복구시켜주면 함수를 호출하는 입장에서는 함수가 무슨 레지스터를 사용할지 신경쓸 필요가 없으므로 편리합니다.
-
-이렇게 함수 호출할때 인자 전달 방법, 지역 변수 생성과 레지스터의 복구까지가 함수 호출 규약에 정해져있는 것들입니다.
