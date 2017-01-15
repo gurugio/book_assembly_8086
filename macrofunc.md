@@ -1,7 +1,14 @@
-#매크로 함수 만들기
+# Macro function
+
 이전에 설명했듯이 매크로는 함수처럼 코드가 호출되는게 아니라 코드가 복사되서 들어갑니다. C의 preprocessor나 인라인 함수와 같습니다.
 
 매크로는 이렇게 만듭니다.
+
+As I described before, macro function is not called, inserted to where it is.
+It's same to preprocessor and inline function of C language.
+
+Following is template to declare macro.
+
 ```
 name    MACRO  [parameters,...] 
 
@@ -10,9 +17,7 @@ name    MACRO  [parameters,...]
 ENDM
 ```
 
-MACRO라는 키워드로 매크로를 선언하고 인자들도 지정할 수 있습니다.
-
-예를 보면
+MACRO keyword can have parameters like following.
 
 ```
 MyMacro    MACRO  p1, p2, p3
@@ -32,9 +37,12 @@ MyMacro 4, 5, DX
 RET
 ```
 
-이렇게 매크로를 만들어서 쓸 수 있습니다. 함수처럼 call을 쓸 필요없이 매크로 이름만 쓰면 됩니다. 매크로는 어셈블러의 키워드이지 프로세서의 명령어가 아니니까요.
+Above example also shows how to use the macro function.
+We don't need call instruction. Just write the name of macro and arguments.
+That is because MACRO is keyword for assembler, not instruction of 8086.
 
-매크로가 어셈블되면 이렇게 됩니다.
+Following shows the assembled code of the macro function.
+
 ```
 MOV AX, 00001h
 MOV BX, 00002h
@@ -43,9 +51,11 @@ MOV AX, 00004h
 MOV BX, 00005h
 MOV CX, DX
 ```
-대강 어떻게 쓰는지는 간단합니다. 그런데 왠지 함수를 만드는 것보다 더 고급스럽고 더 함수같아 보이는건 기분탓입니다 ;-)  emu8086말고 최신 어셈블러를 쓰면 함수를 만들 때도 함수 인자를 지정하거나하는 기능을 제공합니다. 그래서 거의 C처럼 어셈블리 프로그래밍을 할 수 있습니다.
 
-만약에 매크로 내부에서 점프를 해야될 일이 있다면 label을 어떻게 만들어야할까요? 매크로는 코드의 반복이므로 같은 이름의 label도 반복적으로 나타나게되서 어셈블러에서 에러가 납니다. 그럴때는 다음과 같이 local이라는 키워드를 사용하면 됩니다.
+If we need to make a label inside the macro function, how we can make label?
+Code of macro function is repeated, so label also will be declared again.
+For that case, emu8086 has LOCAL keyword as following example.
+
 ```
 MyMacro2    MACRO
     LOCAL label1, label2
