@@ -23,7 +23,6 @@
 * [stack](stack.md)
 * [function](function.md)
 * [function\_calling](functioncalling.md)
-* [bios\_interrupt](biosinterrupt.md)
 * [macro\_func](macrofunc.md)
 * [howto\_emu8086.inc](howtoemu8086inc.md)
 * [go\_further](gofurther.md)
