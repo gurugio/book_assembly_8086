@@ -1,19 +1,23 @@
-#emu8086.inc 사용법
+# emu8086.inc
 
 emu8086 프로그램이 자체적으로 제공하는 라이브러리가 있습니다. emu8086.inc 입니다. include "emu8086.inc"라는 키워드만 사용하면 라이브러리를 사용할 수 있습니다.
 
-##매크로
+emu8086 provides some libraries that have macro functions for IO, mathmatic operaion and so on.
+emu8086.inc is the most common file.
+You can use the library if you write ``include "emu8086.inc`` at the first line of source file.
 
-제공되는 매크로 몇가지를 소개합니다.
+## macro function
 
-* PUTC char - 한개의 파라미터를 가진 매크로, 현재위치의 아스키 문자를 출력함 
-* GOTOXY col, row - 두개의 파라미터를 가진 매크로, 커서위치를 정함 
-* PRINT string - 한개의 파라미터를 가진 매크로, 문자열을 출력함 
-* PRINT string - 한개의 파라미터를 가진 매크로, 문자열을 출력함, PRINT와 같지만 문자열 끝에 '캐리지 리턴'을 자동으로 추가해줌 
-* CURSOROFF - 텍스트 커서 해제 
-* CURSORON - 텍스트 커서 시작 
+Let me introduce some macro functions.
 
-이렇게 사용하면 됩니다.
+* PUTC char - print one character
+* GOTOXY col, row - set cursor position
+* PRINT string - print a string 
+* CURSOROFF - turn off text cursor 
+* CURSORON - turn on text curosr 
+
+Following is an example.
+
 ```
 include "emu8086.inc"
 
@@ -31,30 +35,26 @@ END               ; directive to stop the compiler.
 ```
  
 
-##함수
+## library function
 
-제공되는 함수들도 있는데 몇가지를 소개합니다.
+Some library functions.
 
+* PRINT_STRING - print a string that addressed by DS:SI register
+ * usage: write DEFINE_PRINT_STRING before END keyword
+* PTHIS - get a address from stack and print a string
+ * how to call: CALL PTHIS db 'Hello World', 0
+ * usage: write DEFINE_PTHIS before END keyword
+* CLEAR_SCREEN - clear entire screen
+ * usage: write DEFINE_CLEAR_SCREEN before END keyword
+* SCAN_NUM - get number from keybord and store the number in cx
+ * usage : DEFINE_SCAN_NUM before END keyword
+* PRINT_NUM - print a decimal number in AX
+ * usage : write DEFINE_PRINT_NUM and DEFINE_PRINT_NUM_UNS before END keyword
+* PRINT_NUM_UNS - print a signed decimal number in AX
+ * usage : DEFINE_PRINT_NUM_UNS before END keyword
 
-* PRINT_STRING - 현재 커서부터 NULL까지 출력하고 DS:SI레지스터에서 문자열의 주소를 받는 프로시져.
- * 사용법 : END 지시어전에 DEFINE_PRINT_STRING 선언
-* PTHIS - 현재 커서부터 NULL까지 출력하지만(PRINT_STRING처럼) 스택에서 문자열의 주소를 받는 프로시져. CALL 명령어 바로다음에 ZERO TERMINATED를 정의해야한다. 
- * ex) CALL PTHIS db 'Hello World', 0
- * 사용법 : END지시어전에 DEFINE_PTHIS 선언
-* GET_STRING - 유저로부터 문자열을 받고, DX의 버퍼크기만한 DS:DI버퍼로 작성된 문자열은 받는 프로시져. 'Enter'가 입력이 되면 멈춘다.
- * 사용법 : END 지시어전에 DEFINE_GET_STRING 선언
-* CLEAR_SCREEN - 화면을 깨끗이 정리하고(스크롤되는 전체화면), 커서를 위에 위치시키는 프로시져.
- * 사용법 : END 지시어 전에 DEFINE_CLEAR_SCREEN 선언
-* SCAN_NUM - 키보드로부터 정수를 입력받고, CX레지스터에 결과값을 저장하는 프로시져.
- * 사용법 : END 지시어 전에 DEFINE_SCAN_NUM 선언
-* PRINT_NUM - AX레지스터에 있는 정수를 출력하는 프로시져.
- * 사용법 : END 지시어 전에 DEFINE_PRINT_NUM and DEFINE_PRINT_NUM_UNS 선언
-* PRINT_NUM_UNS - AX레지스터에 있는 부호없는 정수를 출력하는 프로시져.
- * 사용법 : END지시어 전에 DEFINE_PRINT_NUM_UNS 선언
-
- 
-
-예제를 보시면 쉽게 사용법을 아실 수 있습니다. 함수이므로 call 명령으로 호출해야합니다. 매크로와는 다릅니다.
+Following shows how to use the functions.
+They are functions, so you should call them with call instruction.
 ```
 include 'emu8086.inc'
 
