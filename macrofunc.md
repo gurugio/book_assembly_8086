@@ -1,9 +1,5 @@
 # Macro function
 
-이전에 설명했듯이 매크로는 함수처럼 코드가 호출되는게 아니라 코드가 복사되서 들어갑니다. C의 preprocessor나 인라인 함수와 같습니다.
-
-매크로는 이렇게 만듭니다.
-
 As I described before, macro function is not called, inserted to where it is.
 It's same to preprocessor and inline function of C language.
 
