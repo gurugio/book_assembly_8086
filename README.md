@@ -19,7 +19,7 @@ I cannot say that you would be super programmer if you know the assembly.
 But the excitement, I felt when I saw the inside of computer via assembly, drived me to the Linux kernel and computer architecture.
 I want more people to have the chance to see the other aspect of the computer world.
 
-I want to be like [_Morpheus](https://en.wikipedia.org/wiki/Morpheus_(The_Matrix)) who gave the Red Pill to Neo_ ;-\)
+I want to be like [Morpheus](https://en.wikipedia.org/wiki/Morpheus_(The_Matrix)) who gave the Red Pill to Neo_ ;-\)
 
 
 
