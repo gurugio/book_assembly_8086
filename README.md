@@ -13,11 +13,10 @@ Studying computer itself helps us to figure out how every programming language w
 And you can see the principles common to all programming languages.  
 So I'm sure, you will be able to see programs as assembly code as just like [Neo](https://en.wikipedia.org/wiki/Neo_(The_Matrix)) was able to see the world as code.
 It's really fun.  
-You will discover the new world inside of the computer is actuall composed of many layers which will allow you to see very deep into the world of computers.
-Learning assembly is like visiting new world because it makes you have an ability to understand and handle the complexities of a modern computer.
+You will discover the new world inside of the computer that is actually composed of many layers.
+Learning assembly is like visiting the deep layers of computer, so it make you have intuition to understand and handle the complexities of a modern computer.
 I cannot say that you would be super programmer if you know the assembly.  
-But the excitement I felt when I first knew the assembly led me to the another world, Linux kernel and computer architecture. 
-But the moment of when I saw the inside of computer after learning assembly drived me to the Linux kernel and computer architecture.
+But the excitement, I felt when I saw the inside of computer via assembly, drived me to the Linux kernel and computer architecture.
 I want more people to have the chance to see the other aspect of the computer world.
 
 I want to be like [_Morpheus](https://en.wikipedia.org/wiki/Morpheus_(The_Matrix)) who gave the Red Pill to Neo_ ;-\)
