@@ -1,28 +1,26 @@
 # In the beginning, there was the Assembly
 
-Note. Many of you must already realize that my mother language is not English. Please give me feedback if you find any stupid expression. You can send me via DISCUSSION menu in gitbook site and Issue menu in github site.
+First, thank you for taking the time to read my book! I want to point out that Engilsh is not my first language and you're welcome to provide feedback for grammatical errors you may find. Please see the DISCUSSION menu in the gitbook repository on the github.com web site.
 
 
 In the Beginning of the computer world, there is a Word. It's the Assembly language.  
 It's so close to the machine that it's hard to call it a language.
-But it's a weird language ans it's not simply binary code with 0 and 1.
+But it's a weird language and it's not simply binary code with 0's and 1's.
 The assembly exists since the beginning.
-Since assembly language is very close to the machine language, it's possible to control computer behavior in very specific.
-Therefore learning the assembly is rather close to learning the computer than programming.  
-So learning the assembly is closer to learning computer itself rather than programming it.
+Since the assembly language is very close to the machine language, it's possible to control computer behavior in a very specific manner.
+Therefore learning the assembly language is more like learning how to speak directly to the computer hardware than compared with programming.  
 Studying computer itself helps us to figure out how every programming language works on a computer.
 And you can see the principles common to all programming languages.  
-So I'm sure, you will be able to see programs as assembly code as just like Neo see the world as code.
+So I'm sure, you will be able to see programs as assembly code as just like [Neo](https://en.wikipedia.org/wiki/Neo_(The_Matrix)) was able to see the world as code.
 It's really fun.  
-You will meet the new world inside of the computer that is actuall composed by many layers.
-But you can see the very deep aspect of the computer world.
-Learning assembly is like visiting new world because it makes you have an ability to understand and handle the complicated computer.
+You will discover the new world inside of the computer is actuall composed of many layers which will allow you to see very deep into the world of computers.
+Learning assembly is like visiting new world because it makes you have an ability to understand and handle the complexities of a modern computer.
 I cannot say that you would be super programmer if you know the assembly.  
 But the excitement I felt when I first knew the assembly led me to the another world, Linux kernel and computer architecture. 
 But the moment of when I saw the inside of computer after learning assembly drived me to the Linux kernel and computer architecture.
 I want more people to have the chance to see the other aspect of the computer world.
 
-I want to be like _Morpheus who gave the Red Pill to Neo_ ;-\)
+I want to be like [_Morpheus](https://en.wikipedia.org/wiki/Morpheus_(The_Matrix)) who gave the Red Pill to Neo_ ;-\)
 
 
 
