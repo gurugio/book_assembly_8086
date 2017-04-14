@@ -1,6 +1,6 @@
 # In the beginning, there was the Assembly
 
-First, thank you for taking the time to read my book! I want to point out that Engilsh is not my first language and you're welcome to provide feedback for grammatical errors you may find. Please see the DISCUSSION menu in the gitbook repository on the github.com web site.
+First, thank you for taking the time to read my book! I want to point out that English is not my first language and you're welcome to provide feedback for grammatical errors you may find. Please see the DISCUSSION menu in the gitbook repository on the github.com web site.
 
 
 In the Beginning of the computer world, there is a Word. It's the Assembly language.  
