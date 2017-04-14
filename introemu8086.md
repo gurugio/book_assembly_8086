@@ -15,7 +15,7 @@ Anyway we don't need to make any machine. Let us use the emulator program 'emu80
 [Download emu8086](http://www.emu8086.com/)
 
 There are many other emulator programs.  
-If you are using Linux machine, you might want to another emulator: [I8086emu](http://sourceforge.net/projects/i8086emu/files/latest/download?source=navbar)
+If you are using Linux machine, you might want to another emulator: [I8086emu](http://i8086emu.sourceforge.net/)
 
 If you run the emu8086 program, you can see the small text editor window. There is an emulate menu in the file menulist.
 If you select the emulate menu, you can see following window.
