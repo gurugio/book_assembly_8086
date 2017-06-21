@@ -32,7 +32,7 @@ d16 (offset of a variable)
 
 d8 refers to an 8-bit number, and d16 refers to a 16-bit number.
 
-If you look at it carefully, you can see a sequence of the registers. The first register is bx, bp, then si, di and then the number. The full names of bx, bp are "base register" and "base pointer register", so bx, bp always indicate base address. Also, we know that the names of si and di are the "source index register" and the "destination destination index register", so we can think they has the index added to the base address. If you know C language, you might think of something similar. Yes, those are representations of the array. (Note 1)
+If you look at it carefully, you can see a sequence of the registers. The first register is bx, bp, then si, di and then the number. The full names of bx, bp are "base register" and "base pointer register", so bx, bp always indicate base address. Also, we know that the names of si and di are the "source index register" and the "destination destination index register", so we can think they have the index added to the base address. If you know C language, you might think of something similar. Yes, those are representations of the array. (Note 1)
 
 Let's take an example code.
 
