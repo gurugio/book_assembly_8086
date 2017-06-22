@@ -26,4 +26,6 @@ But now you're ready to start.
 
 PS. Several years ago, emu8086 was a free software but current version you should pay a little money. If you're very poor, you can google the old version. This document was written in many years ago when the emu8086 was free. That's why I used emu8086. So some menu is not the same with the latest version. But the essential functions are the same. So you don't need the latest version to read this document. 
 
-And also you don't need to emu8086 program. You can use the other free emulator. Again, the essential functions are the same in most of the emulators. You can read the register value and memory value after run a single instruction. Actuall that's all we need.
+And also you don't need to emu8086 program. You can use the other free emulator. Again, the essential functions are the same in most of the emulators. If you can read the register value and memory value, and run assembly instructions one by one, that's all we will do. And any 8086 emulator can do it.
+
+PS. I tried wine-1.6.2 on Ubuntu 15.10 but emu8086 didn't run. Please inform me if you succeed to run emu8086 on Linux. 
