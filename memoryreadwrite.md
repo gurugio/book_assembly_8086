@@ -16,7 +16,7 @@ mov ds, ax
 mov cl, 'A'
 mov ch, 11011111b
 mov bx, 15eh
-mov [bx], cx
+mov ds:[bx], cx
 ret
 ```
 
